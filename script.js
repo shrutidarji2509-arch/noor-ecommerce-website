@@ -13,7 +13,7 @@ const productsDatabase = [
     { id: 10, name: "Matte Lipstick - Ruby Red", price: 399, category: "makeup", gender: "women", rating: 4.9, reviews: 512, image: "images/Matte Lipstick - Ruby Red.png", badge: "Bestseller", isNew: false, sales: 1200 },
     { id: 11, name: "Nude Lipstick", price: 299, category: "makeup", gender: "women", rating: 4.6, reviews: 234, image: "images/Nude Lipstick .png", badge: "", isNew: true, sales: 300 },
     { id: 13, name: "Liquid Lipstick - Pink", price: 349, category: "makeup", gender: "women", rating: 4.7, reviews: 178, image: "images/Liquid Lipstick - Pink.png", badge: "New", isNew: true, sales: 250 },
-    { id: 14, name: "Eyeliner Pen", price: 199, category: "makeup", gender: "women", rating: 4.4, reviews: 98, image: "images/mascara.jpeg", badge: "", isNew: false, sales: 320 },
+    { id: 14, name: "Eyeliner Pen", price: 199, category: "makeup", gender: "women", rating: 4.4, reviews: 98, image: "images/eyeliner pen.jpeg", badge: "", isNew: false, sales: 320 },
     { id: 15, name: "Mascara - Volumizing", price: 299, category: "makeup", gender: "women", rating: 4.8, reviews: 245, image: "images/mascara.jpeg", badge: "Top Rated", isNew: false, sales: 680 },
     { id: 16, name: "Compact Powder", price: 449, category: "makeup", gender: "women", rating: 4.5, reviews: 189, image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=300", badge: "", isNew: false, sales: 420 },
     
