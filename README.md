@@ -143,16 +143,16 @@ Order Confirmation
 ![Homepage](images/screenshot/homepage.png)
 
 ## ✨ Product Detail Page
-![Product Detail](images/screenshot/ProductDetail.png)
+![Product Detail](images/screenshot/productdetail.png)
 
 ## 🔐 Login Page
-![Login](images/screenshot/LoginPage.png)
+![Login](images/screenshot/loginpage.png)
 
 ## 🔍 Search Page
-![Search](images/screenshot/SearchPage.png)
+![Search](images/screenshot/searchpage.png)
 
 ## ❤️ Wishlist Page
-![Wishlist](images/screenshot/WishlistPage.png)
+![Wishlist](images/screenshot/wishlistpage.png)
 
 
 ---
