@@ -116,6 +116,7 @@ The project also helps in understanding:
 
 # 🔄 Website Flow / Working
 
+```text
 Home Page
    ↓
 Browse Products
@@ -138,25 +139,7 @@ Order Confirmation
 
 ---
 
-# 📸 Screenshots
-
-## 🏠 Homepage
-![Homepage](images/screenshot/Homepage.png)
-
-## ✨ Product Detail Page
-![Product Detail](images/screenshot/ProductDetail.png)
-
-## 🔐 Login Page
-![Login](images/screenshot/LoginPage.png)
-
-## 🔍 Search Page
-![Search](images/screenshot/SearchPage.png)
-
-## ❤️ Wishlist Page
 ![Wishlist](images/screenshot/WishlistPage.png)
-
-
----
 
 # ✅ Conclusion
 
