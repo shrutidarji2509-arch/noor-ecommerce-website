@@ -142,6 +142,8 @@ Order Confirmation
 ## 🏠 Homepage
 ![Homepage](images/screenshot/homepage.png)
 
+
+
 ## ✨ Product Detail Page
 ![Product Detail](images/screenshot/productdetail.png)
 
