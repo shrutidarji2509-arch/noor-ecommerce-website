@@ -140,7 +140,7 @@ Order Confirmation
 # 📸 Screenshots
 
 ## 🏠 Homepage
-![Homepage](images/screenshot/Homepage.png)
+![Homepage](images/screenshot/homepage.png)
 
 ## ✨ Product Detail Page
 ![Product Detail](images/screenshot/ProductDetail.png)
