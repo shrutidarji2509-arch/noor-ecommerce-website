@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Wishlist - Noor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+.wishlist-page {
+    padding: 80px 50px;
+    min-height: 70vh;
+}
+.wishlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.wishlist-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    position: relative;
+    transition: transform 0.3s;
+}
+.wishlist-card:hover {
+    transform: translateY(-5px);
+}
+.wishlist-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+.wishlist-info {
+    padding: 20px;
+}
+.wishlist-info h3 {
+    margin-bottom: 5px;
+}
+.wishlist-info .price {
+    color: #e91e63;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+.wishlist-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+.wishlist-buttons button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.add-to-cart-wishlist {
+    background: linear-gradient(135deg, #e91e63, #ff6b9d);
+    border: none;
+    color: white;
+}
+.remove-wishlist {
+    background: white;
+    border: 1px solid #e91e63;
+    color: #e91e63;
+}
+.empty-wishlist {
+    text-align: center;
+    padding: 80px;
+}
+</style>
+</head>
+<body>
+
+
+<nav class="navbar">
+    <div class="logo">
+        <span class="logo-icon">✨</span>
+        <span class="logo-text">Noor</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="index.html#products">Products</a>
+    </div>
+    <div class="nav-icons">
+        <i class="fas fa-heart"></i>
+        <i class="fas fa-shopping-bag" onclick="window.location.href='cart.html'"></i>
+        <i class="far fa-user" onclick="window.location.href='login.html'"></i>
+    </div>
+    <div class="hamburger" id="hamburger">☰</div>
+</nav>
+
+
+<div class="wishlist-page">
+    <h1 style="text-align: center; margin-bottom: 40px;">My Wishlist ❤️</h1>
+    <div class="wishlist-grid" id="wishlistGrid"></div>
+</div>
+
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Noor ✨</h3>
+            <p>For every YOU!</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2024 Noor. All rights reserved.</p>
+    </div>
+</footer>
+
+
+<script src="script.js"></script>
+<script>
+function renderWishlist() {
+    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    const container = document.getElementById('wishlistGrid');
+   
+    if (wishlist.length === 0) {
+        container.innerHTML = `<div class="empty-wishlist">
+            <i class="far fa-heart" style="font-size: 80px; color: #ccc;"></i>
+            <h2>Your wishlist is empty</h2>
+            <p>Save items you love to your wishlist</p>
+            <button class="hero-btn" onclick="window.location.href='index.html'">Explore Products</button>
+        </div>`;
+        return;
+    }
+   
+    let html = '';
+    wishlist.forEach((item, index) => {
+        html += `
+            <div class="wishlist-card">
+                <img src="${item.image}" alt="${item.name}">
+                <div class="wishlist-info">
+                    <h3>${item.name}</h3>
+                    <p class="price">₹${item.price}</p>
+                    <div class="wishlist-buttons">
+                        <button class="add-to-cart-wishlist" onclick="addToCartFromWishlist(${index})">Add to Cart</button>
+                        <button class="remove-wishlist" onclick="removeFromWishlist(${index})">Remove</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    container.innerHTML = html;
+}
+
+
+function addToCartFromWishlist(index) {
+    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const item = { ...wishlist[index], quantity: 1 };
+    cart.push(item);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`${item.name} added to cart!`);
+    updateCartCount();
+}
+
+
+function removeFromWishlist(index) {
+    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    wishlist.splice(index, 1);
+    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    renderWishlist();
+}
+
+
+renderWishlist();
+</script>
+</body>
+</html>
+
+
+

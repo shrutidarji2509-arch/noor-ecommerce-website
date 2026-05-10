@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login / Sign Up - Noor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+    background: linear-gradient(135deg, #ffe0f0, #fff0f5);
+}
+.auth-container {
+    background: white;
+    border-radius: 30px;
+    overflow: hidden;
+    max-width: 1000px;
+    width: 100%;
+    display: flex;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+    animation: slideUp 0.5s ease;
+}
+.auth-left {
+    flex: 1;
+    background: linear-gradient(135deg, #e91e63, #ff6b9d);
+    padding: 50px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.auth-left h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+}
+.auth-left p {
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+.auth-features {
+    margin-top: 30px;
+}
+.auth-feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.auth-feature i {
+    font-size: 20px;
+}
+.auth-right {
+    flex: 1;
+    padding: 50px;
+}
+.auth-tabs {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #eee;
+}
+.auth-tab {
+    padding: 10px 0;
+    cursor: pointer;
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s;
+}
+.auth-tab.active {
+    color: #e91e63;
+}
+.auth-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #e91e63;
+}
+.auth-form {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+.auth-form.active {
+    display: block;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+}
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #eee;
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+.form-group input:focus {
+    outline: none;
+    border-color: #e91e63;
+}
+.form-group input.error {
+    border-color: #ff4444;
+}
+.error-message {
+    color: #ff4444;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+.password-field {
+    position: relative;
+}
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+}
+.auth-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #e91e63, #ff6b9d);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.auth-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(233,30,99,0.3);
+}
+.forgot-password {
+    text-align: right;
+    margin-top: 10px;
+}
+.forgot-password a {
+    color: #999;
+    text-decoration: none;
+    font-size: 12px;
+}
+.forgot-password a:hover {
+    color: #e91e63;
+}
+.social-login {
+    margin-top: 30px;
+    text-align: center;
+}
+.social-login p {
+    color: #999;
+    margin-bottom: 15px;
+    position: relative;
+}
+.social-login p::before,
+.social-login p::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 30%;
+    height: 1px;
+    background: #eee;
+}
+.social-login p::before {
+    left: 0;
+}
+.social-login p::after {
+    right: 0;
+}
+.social-icons-auth {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.social-icons-auth i {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 20px;
+}
+.social-icons-auth i:hover {
+    background: #e91e63;
+    color: white;
+    transform: translateY(-3px);
+}
+.terms {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+    color: #999;
+}
+.terms a {
+    color: #e91e63;
+    text-decoration: none;
+}
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@media (max-width: 768px) {
+    .auth-container { flex-direction: column; }
+    .auth-left { padding: 30px; text-align: center; }
+    .auth-feature { justify-content: center; }
+    .auth-right { padding: 30px; }
+}
+</style>
+</head>
+<body>
+
+
+<div class="auth-page">
+    <div class="auth-container">
+        <div class="auth-left">
+            <h2>Welcome to Noor ✨</h2>
+            <p>Your journey to luxury beauty starts here. Sign in to discover exclusive offers, track orders, and save your favorites.</p>
+            <div class="auth-features">
+                <div class="auth-feature">
+                    <i class="fas fa-truck"></i>
+                    <span>Free Shipping on orders ₹999+</span>
+                </div>
+                <div class="auth-feature">
+                    <i class="fas fa-gem"></i>
+                    <span>Exclusive Member Discounts</span>
+                </div>
+                <div class="auth-feature">
+                    <i class="fas fa-heart"></i>
+                    <span>Save to Wishlist</span>
+                </div>
+                <div class="auth-feature">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Easy Returns & Exchange</span>
+                </div>
+            </div>
+        </div>
+        <div class="auth-right">
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="switchTab('login')">Login</div>
+                <div class="auth-tab" onclick="switchTab('signup')">Sign Up</div>
+            </div>
+           
+            <!-- Login Form -->
+            <div id="loginForm" class="auth-form active">
+                <form id="loginFormElement" onsubmit="return false;">
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="loginEmail" placeholder="Enter your email">
+                        <div class="error-message" id="loginEmailError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="password-field">
+                            <input type="password" id="loginPassword" placeholder="Enter your password">
+                            <i class="far fa-eye password-toggle" onclick="togglePassword('loginPassword', this)"></i>
+                        </div>
+                        <div class="error-message" id="loginPasswordError"></div>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#" onclick="showForgotPassword()">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="auth-btn" onclick="handleLogin()">Login →</button>
+                </form>
+                <div class="social-login">
+                    <p>Or continue with</p>
+                    <div class="social-icons-auth">
+                        <i class="fab fa-google" onclick="socialLogin('google')"></i>
+                        <i class="fab fa-facebook-f" onclick="socialLogin('facebook')"></i>
+                        <i class="fab fa-apple" onclick="socialLogin('apple')"></i>
+                    </div>
+                </div>
+            </div>
+           
+            <!-- Sign Up Form -->
+            <div id="signupForm" class="auth-form">
+                <form id="signupFormElement" onsubmit="return false;">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="signupName" placeholder="Enter your full name">
+                        <div class="error-message" id="signupNameError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="signupEmail" placeholder="Enter your email">
+                        <div class="error-message" id="signupEmailError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="signupPhone" placeholder="10-digit mobile number" maxlength="10">
+                        <div class="error-message" id="signupPhoneError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="password-field">
+                            <input type="password" id="signupPassword" placeholder="Create a password">
+                            <i class="far fa-eye password-toggle" onclick="togglePassword('signupPassword', this)"></i>
+                        </div>
+                        <div class="error-message" id="signupPasswordError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <div class="password-field">
+                            <input type="password" id="signupConfirm" placeholder="Confirm your password">
+                            <i class="far fa-eye password-toggle" onclick="togglePassword('signupConfirm', this)"></i>
+                        </div>
+                        <div class="error-message" id="signupConfirmError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="termsCheckbox" style="width: auto;">
+                            I agree to the <a href="#" style="color:#e91e63;">Terms & Conditions</a> and <a href="#" style="color:#e91e63;">Privacy Policy</a>
+                        </label>
+                    </div>
+                    <button type="submit" class="auth-btn" onclick="handleSignup()">Create Account →</button>
+                </form>
+                <div class="social-login">
+                    <p>Or sign up with</p>
+                    <div class="social-icons-auth">
+                        <i class="fab fa-google" onclick="socialLogin('google')"></i>
+                        <i class="fab fa-facebook-f" onclick="socialLogin('facebook')"></i>
+                        <i class="fab fa-apple" onclick="socialLogin('apple')"></i>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="terms">
+                By continuing, you agree to Noor's <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+// Switch between Login and Signup tabs
+function switchTab(tab) {
+    const tabs = document.querySelectorAll('.auth-tab');
+    const forms = document.querySelectorAll('.auth-form');
+   
+    tabs.forEach(t => t.classList.remove('active'));
+    forms.forEach(f => f.classList.remove('active'));
+   
+    if (tab === 'login') {
+        tabs[0].classList.add('active');
+        document.getElementById('loginForm').classList.add('active');
+    } else {
+        tabs[1].classList.add('active');
+        document.getElementById('signupForm').classList.add('active');
+    }
+   
+    // Clear all error messages when switching tabs
+    clearAllErrors();
+}
+
+
+// Toggle password visibility
+function togglePassword(inputId, iconElement) {
+    const input = document.getElementById(inputId);
+    if (input.type === 'password') {
+        input.type = 'text';
+        iconElement.classList.remove('fa-eye');
+        iconElement.classList.add('fa-eye-slash');
+    } else {
+        input.type = 'password';
+        iconElement.classList.remove('fa-eye-slash');
+        iconElement.classList.add('fa-eye');
+    }
+}
+
+
+// Clear all error messages
+function clearAllErrors() {
+    const errorMessages = document.querySelectorAll('.error-message');
+    errorMessages.forEach(error => {
+        error.style.display = 'none';
+        error.innerText = '';
+    });
+   
+    const inputs = document.querySelectorAll('.form-group input');
+    inputs.forEach(input => {
+        input.classList.remove('error');
+    });
+}
+
+
+// Show error for a specific field
+function showError(fieldId, message) {
+    const errorElement = document.getElementById(fieldId + 'Error');
+    const inputElement = document.getElementById(fieldId);
+    if (errorElement) {
+        errorElement.innerText = message;
+        errorElement.style.display = 'block';
+    }
+    if (inputElement) {
+        inputElement.classList.add('error');
+    }
+}
+
+
+// Hide error for a specific field
+function hideError(fieldId) {
+    const errorElement = document.getElementById(fieldId + 'Error');
+    const inputElement = document.getElementById(fieldId);
+    if (errorElement) {
+        errorElement.style.display = 'none';
+        errorElement.innerText = '';
+    }
+    if (inputElement) {
+        inputElement.classList.remove('error');
+    }
+}
+
+
+// Validate Email
+function validateEmail(email) {
+    const re = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
+    return re.test(email);
+}
+
+
+// Validate Phone (10 digits)
+function validatePhone(phone) {
+    const re = /^[0-9]{10}$/;
+    return re.test(phone);
+}
+
+
+// Validate Password Strength
+function validatePasswordStrength(password) {
+    if (password.length < 6) {
+        return { valid: false, message: 'Password must be at least 6 characters' };
+    }
+    if (!/[A-Z]/.test(password)) {
+        return { valid: false, message: 'Password must contain at least one uppercase letter' };
+    }
+    if (!/[a-z]/.test(password)) {
+        return { valid: false, message: 'Password must contain at least one lowercase letter' };
+    }
+    if (!/[0-9]/.test(password)) {
+        return { valid: false, message: 'Password must contain at least one number' };
+    }
+    return { valid: true, message: '' };
+}
+
+
+// Handle Login
+function handleLogin() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+   
+    let isValid = true;
+   
+    // Validate Email
+    if (!email) {
+        showError('loginEmail', 'Email is required');
+        isValid = false;
+    } else if (!validateEmail(email)) {
+        showError('loginEmail', 'Please enter a valid email address');
+        isValid = false;
+    } else {
+        hideError('loginEmail');
+    }
+   
+    // Validate Password
+    if (!password) {
+        showError('loginPassword', 'Password is required');
+        isValid = false;
+    } else {
+        hideError('loginPassword');
+    }
+   
+    if (!isValid) return;
+   
+    // Get users from localStorage
+    const users = JSON.parse(localStorage.getItem('noorUsers')) || [];
+    const user = users.find(u => u.email === email && u.password === password);
+   
+    if (user) {
+        // Login successful
+        localStorage.setItem('currentUser', JSON.stringify({
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
+            isLoggedIn: true
+        }));
+       
+        // Show success message
+        alert(`Welcome back, ${user.name}! ✨`);
+       
+        // Redirect to home page
+        window.location.href = 'index.html';
+    } else {
+        showError('loginEmail', 'Invalid email or password');
+        showError('loginPassword', '');
+    }
+}
+
+
+// Handle Signup
+function handleSignup() {
+    const name = document.getElementById('signupName').value.trim();
+    const email = document.getElementById('signupEmail').value.trim();
+    const phone = document.getElementById('signupPhone').value.trim();
+    const password = document.getElementById('signupPassword').value;
+    const confirmPassword = document.getElementById('signupConfirm').value;
+    const termsChecked = document.getElementById('termsCheckbox').checked;
+   
+    let isValid = true;
+   
+    // Validate Name
+    if (!name) {
+        showError('signupName', 'Full name is required');
+        isValid = false;
+    } else if (name.length < 2) {
+        showError('signupName', 'Name must be at least 2 characters');
+        isValid = false;
+    } else {
+        hideError('signupName');
+    }
+   
+    // Validate Email
+    if (!email) {
+        showError('signupEmail', 'Email is required');
+        isValid = false;
+    } else if (!validateEmail(email)) {
+        showError('signupEmail', 'Please enter a valid email address');
+        isValid = false;
+    } else {
+        // Check if email already exists
+        const users = JSON.parse(localStorage.getItem('noorUsers')) || [];
+        if (users.find(u => u.email === email)) {
+            showError('signupEmail', 'Email already registered. Please login.');
+            isValid = false;
+        } else {
+            hideError('signupEmail');
+        }
+    }
+   
+    // Validate Phone
+    if (!phone) {
+        showError('signupPhone', 'Phone number is required');
+        isValid = false;
+    } else if (!validatePhone(phone)) {
+        showError('signupPhone', 'Please enter a valid 10-digit phone number');
+        isValid = false;
+    } else {
+        hideError('signupPhone');
+    }
+   
+    // Validate Password
+    const passwordValidation = validatePasswordStrength(password);
+    if (!password) {
+        showError('signupPassword', 'Password is required');
+        isValid = false;
+    } else if (!passwordValidation.valid) {
+        showError('signupPassword', passwordValidation.message);
+        isValid = false;
+    } else {
+        hideError('signupPassword');
+    }
+   
+    // Validate Confirm Password
+    if (!confirmPassword) {
+        showError('signupConfirm', 'Please confirm your password');
+        isValid = false;
+    } else if (password !== confirmPassword) {
+        showError('signupConfirm', 'Passwords do not match');
+        isValid = false;
+    } else {
+        hideError('signupConfirm');
+    }
+   
+    // Validate Terms
+    if (!termsChecked) {
+        alert('Please agree to the Terms & Conditions and Privacy Policy');
+        isValid = false;
+    }
+   
+    if (!isValid) return;
+   
+    // Create new user
+    const newUser = {
+        name: name,
+        email: email,
+        phone: phone,
+        password: password,
+        createdAt: new Date().toISOString()
+    };
+   
+    // Save to localStorage
+    const users = JSON.parse(localStorage.getItem('noorUsers')) || [];
+    users.push(newUser);
+    localStorage.setItem('noorUsers', JSON.stringify(users));
+   
+    // Auto login
+    localStorage.setItem('currentUser', JSON.stringify({
+        name: name,
+        email: email,
+        phone: phone,
+        isLoggedIn: true
+    }));
+   
+    // Show success message
+    alert(`Welcome to Noor, ${name}! ✨ Your account has been created successfully.`);
+   
+    // Redirect to home page
+    window.location.href = 'index.html';
+}
+
+
+// Forgot Password
+function showForgotPassword() {
+    const email = prompt('Enter your registered email address to reset your password:');
+    if (email && validateEmail(email)) {
+        const users = JSON.parse(localStorage.getItem('noorUsers')) || [];
+        const user = users.find(u => u.email === email);
+       
+        if (user) {
+            // In a real app, you'd send an email. For demo, show password
+            alert(`Your password is: ${user.password}\n\nPlease login and change your password for security.`);
+        } else {
+            alert('No account found with this email address.');
+        }
+    } else if (email) {
+        alert('Please enter a valid email address.');
+    }
+}
+
+
+// Social Login (Demo)
+function socialLogin(platform) {
+    alert(`${platform.charAt(0).toUpperCase() + platform.slice(1)} login will be available soon! 🔜\n\nFor now, please use email signup.`);
+}
+
+
+// Check if user is already logged in and redirect
+window.addEventListener('load', function() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.isLoggedIn) {
+        // User is already logged in, ask if they want to continue
+        const stayLoggedIn = confirm(`You are already logged in as ${currentUser.name}.\n\nDo you want to continue to the homepage?`);
+        if (stayLoggedIn) {
+            window.location.href = 'index.html';
+        }
+    }
+});
+
+
+// Real-time validation for signup form
+document.getElementById('signupEmail')?.addEventListener('blur', function() {
+    const email = this.value.trim();
+    if (email && !validateEmail(email)) {
+        showError('signupEmail', 'Please enter a valid email address');
+    } else if (email) {
+        hideError('signupEmail');
+    }
+});
+
+
+document.getElementById('signupPhone')?.addEventListener('blur', function() {
+    const phone = this.value.trim();
+    if (phone && !validatePhone(phone)) {
+        showError('signupPhone', 'Please enter a valid 10-digit phone number');
+    } else if (phone) {
+        hideError('signupPhone');
+    }
+});
+
+
+document.getElementById('signupPassword')?.addEventListener('input', function() {
+    const password = this.value;
+    if (password) {
+        const validation = validatePasswordStrength(password);
+        if (!validation.valid) {
+            showError('signupPassword', validation.message);
+        } else {
+            hideError('signupPassword');
+        }
+    }
+});
+
+
+document.getElementById('signupConfirm')?.addEventListener('input', function() {
+    const password = document.getElementById('signupPassword').value;
+    const confirm = this.value;
+    if (confirm && password !== confirm) {
+        showError('signupConfirm', 'Passwords do not match');
+    } else if (confirm) {
+        hideError('signupConfirm');
+    }
+});
+
+
+// Enter key submission
+document.getElementById('loginPassword')?.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') handleLogin();
+});
+document.getElementById('signupConfirm')?.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') handleSignup();
+});
+</script>
+</body>
+</html>  

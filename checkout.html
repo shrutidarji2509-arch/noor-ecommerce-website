@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout - Noor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+.checkout-page {
+    padding: 80px 50px;
+    min-height: 70vh;
+    background: linear-gradient(135deg, #fff0f5, #ffe4ec);
+}
+.checkout-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 0.8fr;
+    gap: 40px;
+}
+.checkout-form {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+.form-section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+.form-section h3 {
+    margin-bottom: 20px;
+    color: #333;
+}
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #555;
+}
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.3s;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: #e91e63;
+}
+.form-group input.error, .form-group select.error {
+    border-color: #ff4444;
+}
+.error-message {
+    color: #ff4444;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+.payment-methods {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.payment-method {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+.payment-method:hover {
+    border-color: #e91e63;
+}
+.payment-method input {
+    width: auto;
+}
+.order-summary {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+.order-summary h3 {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+}
+.order-item-checkout {
+    display: flex;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+.order-item-checkout img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.order-item-details {
+    flex: 1;
+}
+.order-item-details h4 {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.order-item-details p {
+    color: #666;
+    font-size: 12px;
+}
+.coupon-section {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+}
+.coupon-section input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #eee;
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s;
+}
+.coupon-section input:focus {
+    outline: none;
+    border-color: #e91e63;
+}
+.coupon-section button {
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #e91e63, #ff6b9d);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.coupon-section button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(233,30,99,0.3);
+}
+.available-coupons {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed #eee;
+}
+.available-coupons h4 {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.coupon-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+.coupon-card {
+    background: linear-gradient(135deg, #fff0f5, #ffe4ec);
+    border-radius: 12px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 1px solid rgba(233,30,99,0.2);
+}
+.coupon-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(233,30,99,0.15);
+}
+.coupon-code {
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 14px;
+    color: #e91e63;
+    background: white;
+    padding: 4px 10px;
+    border-radius: 8px;
+    letter-spacing: 1px;
+}
+.coupon-desc {
+    font-size: 11px;
+    color: #666;
+}
+.coupon-desc strong {
+    color: #e91e63;
+}
+.copy-coupon {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+.copy-coupon:hover {
+    color: #e91e63;
+}
+.applied-coupon {
+    background: #e8f5e9;
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.applied-coupon span {
+    font-size: 13px;
+}
+.applied-coupon strong {
+    color: #4caf50;
+}
+.remove-coupon {
+    background: none;
+    border: none;
+    color: #ff4444;
+    cursor: pointer;
+    font-size: 14px;
+}
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+.summary-total {
+    font-size: 20px;
+    font-weight: 700;
+    color: #e91e63;
+    border-top: 2px solid #eee;
+    padding-top: 15px;
+    margin-top: 10px;
+}
+.place-order-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #e91e63, #ff6b9d);
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.3s;
+}
+.place-order-btn:hover {
+    transform: translateY(-2px);
+}
+.back-home-container {
+    text-align: center;
+    margin: 30px 0;
+}
+.back-home-btn {
+    padding: 12px 30px;
+    background: linear-gradient(90deg, #ff69b4, #ff1493);
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.back-home-btn:hover {
+    transform: scale(1.05);
+}
+.notification {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    background: white;
+    padding: 15px 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 10000;
+    animation: slideInRight 0.3s ease;
+    border-left: 4px solid;
+}
+.notification-success { border-left-color: #4caf50; }
+.notification-error { border-left-color: #ff4444; }
+.notification-info { border-left-color: #2196f3; }
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(100px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+@media (max-width: 768px) {
+    .checkout-container { grid-template-columns: 1fr; }
+    .checkout-page { padding: 80px 20px; }
+    .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+
+<nav class="navbar">
+    <div class="logo">
+        <span class="logo-icon">✨</span>
+        <span class="logo-text">Noor</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="index.html#products">Products</a>
+        <a href="index.html#reviews">Reviews</a>
+    </div>
+    <div class="nav-icons">
+        <i class="far fa-heart" onclick="window.location.href='wishlist.html'"></i>
+        <i class="fas fa-shopping-bag" onclick="window.location.href='cart.html'"></i>
+        <i class="far fa-user" onclick="window.location.href='login.html'"></i>
+        <i class="fas fa-venus-mars gender-toggle" onclick="toggleGenderModal()" title="Change Mode"></i>
+        <span id="cart-count-nav" class="cart-badge">0</span>
+    </div>
+    <div class="hamburger" id="hamburger">☰</div>
+</nav>
+
+
+<div class="checkout-page">
+    <div class="checkout-container">
+        <div class="checkout-form">
+            <form id="checkoutForm" onsubmit="return false;">
+                <div class="form-section">
+                    <h3>Contact Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" id="fullName" required>
+                            <div class="error-message" id="fullNameError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" id="email" required>
+                            <div class="error-message" id="emailError"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number *</label>
+                        <input type="tel" id="phone" placeholder="10-digit mobile number" maxlength="10" required>
+                        <div class="error-message" id="phoneError"></div>
+                    </div>
+                </div>
+               
+                <div class="form-section">
+                    <h3>Shipping Address</h3>
+                    <div class="form-group">
+                        <label>Street Address *</label>
+                        <input type="text" id="address" required>
+                        <div class="error-message" id="addressError"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Country *</label>
+                            <select id="country" required>
+                                <option value="">Select Country</option>
+                                <option value="India">India</option>
+                                <option value="USA">United States</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="Canada">Canada</option>
+                                <option value="Australia">Australia</option>
+                                <option value="UAE">UAE</option>
+                            </select>
+                            <div class="error-message" id="countryError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>State *</label>
+                            <select id="state" required disabled>
+                                <option value="">Select Country First</option>
+                            </select>
+                            <div class="error-message" id="stateError"></div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>City *</label>
+                            <select id="city" required disabled>
+                                <option value="">Select State First</option>
+                            </select>
+                            <div class="error-message" id="cityError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>PIN Code *</label>
+                            <input type="text" id="pincode" pattern="[0-9]{6}" maxlength="6" required>
+                            <div class="error-message" id="pincodeError"></div>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="form-section">
+                    <h3>Payment Method</h3>
+                    <div class="payment-methods">
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="card" checked> 💳 Credit/Debit Card
+                        </label>
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="upi"> 📱 UPI
+                        </label>
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="cod"> 💵 Cash on Delivery
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+       
+        <div class="order-summary">
+            <h3>Order Summary</h3>
+            <div id="checkoutItems"></div>
+           
+            <div class="coupon-section">
+                <input type="text" id="couponCode" placeholder="Enter coupon code (e.g., NOOR10)">
+                <button onclick="applyCoupon()">Apply</button>
+            </div>
+           
+            <div class="available-coupons">
+                <h4><i class="fas fa-tags"></i> Available Coupons (Click to apply)</h4>
+                <div class="coupon-list" id="couponList"></div>
+            </div>
+           
+            <div id="appliedCouponDisplay"></div>
+            <div id="checkoutTotals"></div>
+            <button class="place-order-btn" onclick="placeOrder()">Place Order →</button>
+        </div>
+    </div>
+   
+    <div class="back-home-container">
+        <a href="index.html">
+            <button class="back-home-btn">← Back to Home</button>
+        </a>
+    </div>
+</div>
+
+
+<script>
+// ==================== LOCATION DATA ====================
+const locationData = {
+    India: {
+        states: {
+            "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik", "Thane"],
+            "Delhi": ["New Delhi", "South Delhi", "North Delhi", "East Delhi", "West Delhi"],
+            "Karnataka": ["Bangalore", "Mysore", "Mangalore", "Hubli", "Belgaum"],
+            "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Tiruchirappalli", "Salem"],
+            "Uttar Pradesh": ["Lucknow", "Kanpur", "Agra", "Varanasi", "Allahabad"],
+            "West Bengal": ["Kolkata", "Howrah", "Durgapur", "Siliguri", "Asansol"],
+            "Gujarat": ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Bhavnagar"],
+            "Rajasthan": ["Jaipur", "Jodhpur", "Udaipur", "Kota", "Ajmer"],
+            "Punjab": ["Chandigarh", "Ludhiana", "Amritsar", "Jalandhar", "Patiala"],
+            "Telangana": ["Hyderabad", "Warangal", "Nizamabad", "Karimnagar", "Khammam"]
+        }
+    },
+    USA: {
+        states: {
+            "California": ["Los Angeles", "San Francisco", "San Diego", "Sacramento", "San Jose"],
+            "New York": ["New York City", "Buffalo", "Rochester", "Syracuse", "Albany"],
+            "Texas": ["Houston", "Dallas", "Austin", "San Antonio", "Fort Worth"],
+            "Florida": ["Miami", "Orlando", "Tampa", "Jacksonville", "Fort Lauderdale"],
+            "Illinois": ["Chicago", "Aurora", "Naperville", "Rockford", "Springfield"]
+        }
+    },
+    UK: {
+        states: {
+            "England": ["London", "Manchester", "Birmingham", "Liverpool", "Bristol"],
+            "Scotland": ["Edinburgh", "Glasgow", "Aberdeen", "Dundee", "Inverness"],
+            "Wales": ["Cardiff", "Swansea", "Newport", "Bangor", "St Davids"],
+            "Northern Ireland": ["Belfast", "Derry", "Lisburn", "Newry", "Armagh"]
+        }
+    },
+    Canada: {
+        states: {
+            "Ontario": ["Toronto", "Ottawa", "Mississauga", "Hamilton", "London"],
+            "British Columbia": ["Vancouver", "Victoria", "Surrey", "Burnaby", "Richmond"],
+            "Quebec": ["Montreal", "Quebec City", "Laval", "Gatineau", "Longueuil"],
+            "Alberta": ["Calgary", "Edmonton", "Red Deer", "Lethbridge", "Medicine Hat"]
+        }
+    },
+    Australia: {
+        states: {
+            "New South Wales": ["Sydney", "Newcastle", "Wollongong", "Central Coast", "Parramatta"],
+            "Victoria": ["Melbourne", "Geelong", "Ballarat", "Bendigo", "Melton"],
+            "Queensland": ["Brisbane", "Gold Coast", "Cairns", "Townsville", "Sunshine Coast"],
+            "Western Australia": ["Perth", "Mandurah", "Bunbury", "Albany", "Geraldton"]
+        }
+    },
+    UAE: {
+        states: {
+            "Dubai": ["Dubai City", "Jumeirah", "Deira", "Bur Dubai", "Al Nahda"],
+            "Abu Dhabi": ["Abu Dhabi City", "Al Ain", "Khalifa City", "Yas Island", "Saadiyat Island"],
+            "Sharjah": ["Sharjah City", "Al Khan", "Al Nahda", "Al Qasimia", "Al Majaz"],
+            "Ajman": ["Ajman City", "Al Jurf", "Al Rawda", "Al Zahra", "Emirates City"]
+        }
+    }
+};
+
+
+// Cart data
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+
+// ==================== COUPON DATABASE ====================
+const couponsDatabase = {
+    'NOOR10': { discount: 10, type: 'percentage', desc: '10% OFF on entire order', minOrder: 499 },
+    'NOOR50': { discount: 50, type: 'fixed', desc: '₹50 OFF on orders above ₹999', minOrder: 999 },
+    'WELCOME20': { discount: 20, type: 'percentage', desc: '20% OFF for new customers', minOrder: 299 },
+    'FREESHIP': { discount: 0, type: 'freeship', desc: 'Free Shipping on any order', minOrder: 0 },
+    'BEAUTY15': { discount: 15, type: 'percentage', desc: '15% OFF on makeup products', minOrder: 599 },
+    'GLOW20': { discount: 20, type: 'percentage', desc: '20% OFF on skincare', minOrder: 799 },
+    'FIRSTORDER': { discount: 100, type: 'fixed', desc: '₹100 OFF on first order', minOrder: 499 },
+    'FLAT75': { discount: 75, type: 'fixed', desc: '₹75 OFF on orders above ₹1499', minOrder: 1499 },
+    'SUMMER25': { discount: 25, type: 'percentage', desc: '25% OFF Summer Sale', minOrder: 999 }
+};
+
+
+let discount = 0;
+let couponApplied = '';
+
+
+// ==================== LOCATION FUNCTIONS ====================
+// Populate states based on country selection
+document.getElementById('country').addEventListener('change', function() {
+    const country = this.value;
+    const stateSelect = document.getElementById('state');
+    const citySelect = document.getElementById('city');
+   
+    if (country && locationData[country]) {
+        const states = Object.keys(locationData[country].states);
+        stateSelect.innerHTML = '<option value="">Select State</option>' +
+            states.map(state => `<option value="${state}">${state}</option>`).join('');
+        stateSelect.disabled = false;
+        citySelect.innerHTML = '<option value="">Select State First</option>';
+        citySelect.disabled = true;
+    } else {
+        stateSelect.innerHTML = '<option value="">Select Country First</option>';
+        stateSelect.disabled = true;
+        citySelect.innerHTML = '<option value="">Select State First</option>';
+        citySelect.disabled = true;
+    }
+});
+
+
+// Populate cities based on state selection
+document.getElementById('state').addEventListener('change', function() {
+    const country = document.getElementById('country').value;
+    const state = this.value;
+    const citySelect = document.getElementById('city');
+   
+    if (country && state && locationData[country] && locationData[country].states[state]) {
+        const cities = locationData[country].states[state];
+        citySelect.innerHTML = '<option value="">Select City</option>' +
+            cities.map(city => `<option value="${city}">${city}</option>`).join('');
+        citySelect.disabled = false;
+    } else {
+        citySelect.innerHTML = '<option value="">Select State First</option>';
+        citySelect.disabled = true;
+    }
+});
+
+
+// ==================== HELPER FUNCTIONS ====================
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `<div class="notification-content"><i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i><span>${message}</span></div>`;
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 3000);
+}
+
+
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCountElements = document.querySelectorAll('#cart-count, #cart-count-nav');
+    cartCountElements.forEach(el => {
+        if (el) el.innerText = cart.length;
+    });
+}
+
+
+function showError(fieldId, message) {
+    const errorDiv = document.getElementById(fieldId + 'Error');
+    const input = document.getElementById(fieldId);
+    if (errorDiv) {
+        errorDiv.innerText = message;
+        errorDiv.style.display = 'block';
+    }
+    if (input) input.classList.add('error');
+}
+
+
+function hideError(fieldId) {
+    const errorDiv = document.getElementById(fieldId + 'Error');
+    const input = document.getElementById(fieldId);
+    if (errorDiv) errorDiv.style.display = 'none';
+    if (input) input.classList.remove('error');
+}
+
+
+function validateEmail(email) {
+    const re = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
+    return re.test(email);
+}
+
+
+function validatePhone(phone) {
+    const re = /^[0-9]{10}$/;
+    return re.test(phone);
+}
+
+
+// ==================== COUPON FUNCTIONS ====================
+function displayAvailableCoupons() {
+    const container = document.getElementById('couponList');
+    if (!container) return;
+   
+    container.innerHTML = Object.entries(couponsDatabase).map(([code, data]) => `
+        <div class="coupon-card" onclick="applyCouponCode('${code}')">
+            <div class="coupon-code">${code}</div>
+            <div class="coupon-desc">
+                ${data.desc}<br>
+                <strong>Save ${data.type === 'percentage' ? data.discount + '%' : '₹' + data.discount}</strong>
+                ${data.minOrder > 0 ? ` | Min ₹${data.minOrder}` : ''}
+            </div>
+            <button class="copy-coupon" onclick="event.stopPropagation(); copyCouponCode('${code}')">
+                <i class="fas fa-copy"></i>
+            </button>
+        </div>
+    `).join('');
+}
+
+
+function copyCouponCode(code) {
+    navigator.clipboard.writeText(code);
+    showNotification(`Coupon ${code} copied! Apply it at checkout.`, 'success');
+}
+
+
+function applyCouponCode(code) {
+    document.getElementById('couponCode').value = code;
+    applyCoupon();
+}
+
+
+function applyCoupon() {
+    const code = document.getElementById('couponCode').value.trim().toUpperCase();
+    const coupon = couponsDatabase[code];
+   
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+   
+    if (!coupon) {
+        showNotification('Invalid coupon code!', 'error');
+        return;
+    }
+   
+    if (coupon.minOrder && subtotal < coupon.minOrder) {
+        showNotification(`Minimum order of ₹${coupon.minOrder} required for ${code}`, 'error');
+        return;
+    }
+   
+    let discountAmount = 0;
+    if (coupon.type === 'percentage') {
+        discountAmount = (subtotal * coupon.discount) / 100;
+    } else if (coupon.type === 'fixed') {
+        discountAmount = coupon.discount;
+    } else if (coupon.type === 'freeship') {
+        discountAmount = 0;
+        showNotification('Free shipping applied!', 'success');
+    }
+   
+    discountAmount = Math.min(discountAmount, subtotal);
+    discount = discountAmount;
+    couponApplied = code;
+   
+    showNotification(`Coupon ${code} applied! You saved ₹${discountAmount}`, 'success');
+    displayAppliedCoupon();
+    renderCheckoutSummary();
+}
+
+
+function displayAppliedCoupon() {
+    const container = document.getElementById('appliedCouponDisplay');
+    if (!container) return;
+   
+    if (couponApplied && discount > 0) {
+        container.innerHTML = `
+            <div class="applied-coupon">
+                <div>
+                    <i class="fas fa-check-circle" style="color: #4caf50;"></i>
+                    <span>Coupon <strong>${couponApplied}</strong> applied!</span>
+                    <span style="margin-left: 10px; color: #e91e63;">Saved ₹${discount}</span>
+                </div>
+                <button class="remove-coupon" onclick="removeCoupon()">
+                    <i class="fas fa-times"></i> Remove
+                </button>
+            </div>
+        `;
+    } else {
+        container.innerHTML = '';
+    }
+}
+
+
+function removeCoupon() {
+    discount = 0;
+    couponApplied = '';
+    document.getElementById('couponCode').value = '';
+    displayAppliedCoupon();
+    renderCheckoutSummary();
+    showNotification('Coupon removed', 'info');
+}
+
+
+// ==================== RENDER CHECKOUT SUMMARY ====================
+function renderCheckoutSummary() {
+    const container = document.getElementById('checkoutItems');
+    const totalsContainer = document.getElementById('checkoutTotals');
+   
+    if (cart.length === 0) {
+        window.location.href = 'cart.html';
+        return;
+    }
+   
+    let itemsHtml = '';
+    let subtotal = 0;
+   
+    cart.forEach(item => {
+        const quantity = item.quantity || 1;
+        const total = item.price * quantity;
+        subtotal += total;
+        itemsHtml += `
+            <div class="order-item-checkout">
+                <img src="${item.image}" alt="${item.name}">
+                <div class="order-item-details">
+                    <h4>${item.name}</h4>
+                    <p>Qty: ${quantity}</p>
+                    <p>₹${total}</p>
+                </div>
+            </div>
+        `;
+    });
+   
+    let shipping = 50;
+    if (subtotal > 999 || couponApplied === 'FREESHIP') {
+        shipping = 0;
+    }
+   
+    const total = subtotal + shipping - discount;
+   
+    container.innerHTML = itemsHtml;
+    totalsContainer.innerHTML = `
+        <div class="summary-row"><span>Subtotal</span><span>₹${subtotal}</span></div>
+        <div class="summary-row"><span>Shipping</span><span>${shipping === 0 ? 'Free' : '₹' + shipping}</span></div>
+        ${discount > 0 ? `<div class="summary-row" style="color: #4caf50;"><span>Discount (${couponApplied})</span><span>-₹${discount}</span></div>` : ''}
+        <div class="summary-row summary-total"><span>Total</span><span>₹${total}</span></div>
+        ${subtotal < 1000 && couponApplied !== 'FREESHIP' ? '<div class="summary-row"><span style="color:#e91e63">Add ₹' + (1000 - subtotal) + ' more for free shipping</span><span></span></div>' : ''}
+    `;
+}
+
+
+// ==================== PLACE ORDER ====================
+function placeOrder() {
+    const fullName = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const country = document.getElementById('country').value;
+    const state = document.getElementById('state').value;
+    const city = document.getElementById('city').value;
+    const pincode = document.getElementById('pincode').value.trim();
+    const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+   
+    let isValid = true;
+   
+    if (!fullName) { showError('fullName', 'Full name is required'); isValid = false; }
+    else hideError('fullName');
+   
+    if (!email) { showError('email', 'Email is required'); isValid = false; }
+    else if (!validateEmail(email)) { showError('email', 'Valid email required'); isValid = false; }
+    else hideError('email');
+   
+    if (!phone) { showError('phone', 'Phone number required'); isValid = false; }
+    else if (!validatePhone(phone)) { showError('phone', '10-digit number required'); isValid = false; }
+    else hideError('phone');
+   
+    if (!address) { showError('address', 'Address required'); isValid = false; }
+    else hideError('address');
+   
+    if (!country) { showError('country', 'Select country'); isValid = false; }
+    else hideError('country');
+   
+    if (!state) { showError('state', 'Select state'); isValid = false; }
+    else hideError('state');
+   
+    if (!city) { showError('city', 'Select city'); isValid = false; }
+    else hideError('city');
+   
+    if (!pincode) { showError('pincode', 'PIN code required'); isValid = false; }
+    else if (!/^\d{6}$/.test(pincode)) { showError('pincode', '6-digit PIN required'); isValid = false; }
+    else hideError('pincode');
+   
+    if (!isValid) return;
+   
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+    const shipping = (subtotal > 999 || couponApplied === 'FREESHIP') ? 0 : 50;
+    const total = subtotal + shipping - discount;
+   
+    const orderId = 'NOOR' + Date.now() + Math.floor(Math.random() * 1000);
+   
+    const order = {
+        orderId: orderId,
+        date: new Date().toISOString(),
+        customer: { fullName, email, phone },
+        shippingAddress: { address, city, state, country, pincode },
+        items: cart.map(item => ({
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity || 1,
+            image: item.image
+        })),
+        subtotal: subtotal,
+        shipping: shipping,
+        discount: discount,
+        couponApplied: couponApplied,
+        total: total,
+        paymentMethod: paymentMethod,
+        status: 'order_confirmed',
+        estimatedDelivery: '3-5 business days'
+    };
+   
+    let orders = JSON.parse(localStorage.getItem('orders')) || [];
+    orders.push(order);
+    localStorage.setItem('orders', JSON.stringify(orders));
+    localStorage.setItem('cart', JSON.stringify([]));
+    localStorage.setItem('currentOrder', JSON.stringify(order));
+   
+    updateCartCount();
+    showNotification(`Order placed successfully! Order ID: ${orderId}`, 'success');
+   
+    setTimeout(() => {
+        window.location.href = 'order-success.html';
+    }, 1500);
+}
+
+
+function toggleGenderModal() {
+    window.location.href = 'index.html';
+}
+
+
+// Initialize page
+displayAvailableCoupons();
+renderCheckoutSummary();
+updateCartCount();
+
+
+// Real-time validation
+document.getElementById('email').addEventListener('blur', function() {
+    const email = this.value.trim();
+    if (email && !validateEmail(email)) showError('email', 'Valid email required');
+    else hideError('email');
+});
+
+
+document.getElementById('phone').addEventListener('blur', function() {
+    const phone = this.value.trim();
+    if (phone && !validatePhone(phone)) showError('phone', '10-digit number required');
+    else hideError('phone');
+});
+</script>
+</body>
+</html>

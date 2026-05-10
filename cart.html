@@ -1,0 +1,271 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Cart - Noor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+.cart-page {
+    padding: 80px 50px;
+    min-height: 70vh;
+}
+.cart-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.cart-header {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr 0.5fr;
+    background: linear-gradient(135deg, #ffe0f0, #ffccd5);
+    padding: 15px;
+    border-radius: 15px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.cart-item {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr 0.5fr;
+    align-items: center;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.cart-product {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.cart-product img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.cart-product-info h4 {
+    margin-bottom: 5px;
+}
+.cart-product-info p {
+    color: #666;
+    font-size: 12px;
+}
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.quantity-control button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #e91e63;
+    background: white;
+    cursor: pointer;
+}
+.cart-summary {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    margin-top: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+.summary-total {
+    font-size: 24px;
+    font-weight: 700;
+    color: #e91e63;
+    border-top: 2px solid #eee;
+    padding-top: 15px;
+    margin-top: 10px;
+}
+.checkout-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #e91e63, #ff6b9d);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.3s;
+}
+.checkout-btn:hover {
+    transform: translateY(-2px);
+}
+.empty-cart {
+    text-align: center;
+    padding: 80px;
+}
+.empty-cart i {
+    font-size: 80px;
+    color: #ccc;
+}
+@media (max-width: 768px) {
+    .cart-page { padding: 80px 20px; }
+    .cart-header { display: none; }
+    .cart-item { grid-template-columns: 1fr; gap: 15px; }
+}
+</style>
+</head>
+<body>
+
+
+<nav class="navbar">
+    <div class="logo">
+        <span class="logo-icon">✨</span>
+        <span class="logo-text">Noor</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="index.html#products">Products</a>
+        <a href="index.html#reviews">Reviews</a>
+    </div>
+    <div class="nav-icons">
+        <i class="far fa-heart" onclick="window.location.href='wishlist.html'"></i>
+        <i class="fas fa-shopping-bag"></i>
+        <i class="far fa-user" onclick="window.location.href='login.html'"></i>
+    </div>
+    <div class="hamburger" id="hamburger">☰</div>
+</nav>
+
+
+<div class="cart-page">
+    <div class="cart-container">
+        <h1 style="margin-bottom: 30px;">Your Cart 🛒</h1>
+        <div class="cart-header">
+            <div>Product</div>
+            <div>Price</div>
+            <div>Quantity</div>
+            <div>Total</div>
+            <div></div>
+        </div>
+        <div id="cartItemsContainer"></div>
+        <div id="cartSummary" class="cart-summary"></div>
+    </div>
+</div>
+
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Noor ✨</h3>
+            <p>For every YOU! Luxury beauty essentials.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="track-order.html">Track Order</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2024 Noor. All rights reserved.</p>
+    </div>
+</footer>
+
+
+<script src="script.js"></script>
+<script>
+function renderCartPage() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const container = document.getElementById('cartItemsContainer');
+    const summaryContainer = document.getElementById('cartSummary');
+   
+    if (cart.length === 0) {
+        container.innerHTML = `<div class="empty-cart">
+            <i class="fas fa-shopping-bag"></i>
+            <h2>Your cart is empty</h2>
+            <p>Looks like you haven't added anything yet</p>
+            <button class="hero-btn" onclick="window.location.href='index.html'">Continue Shopping</button>
+        </div>`;
+        summaryContainer.innerHTML = '';
+        updateCartCount();
+        return;
+    }
+   
+    let html = '';
+    let subtotal = 0;
+   
+    cart.forEach((item, index) => {
+        const total = item.price * item.quantity;
+        subtotal += total;
+        html += `
+            <div class="cart-item">
+                <div class="cart-product">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="cart-product-info">
+                        <h4>${item.name}</h4>
+                        <p>${item.description || 'Premium quality product'}</p>
+                    </div>
+                </div>
+                <div>₹${item.price}</div>
+                <div class="quantity-control">
+                    <button onclick="updateQuantity(${index}, -1)">-</button>
+                    <span>${item.quantity}</span>
+                    <button onclick="updateQuantity(${index}, 1)">+</button>
+                </div>
+                <div>₹${total}</div>
+                <div><button class="remove-btn" onclick="removeCartItem(${index})"><i class="fas fa-trash"></i></button></div>
+            </div>
+        `;
+    });
+   
+    const shipping = subtotal > 999 ? 0 : 50;
+    const total = subtotal + shipping;
+   
+    container.innerHTML = html;
+    summaryContainer.innerHTML = `
+        <h3>Order Summary</h3>
+        <div class="summary-row"><span>Subtotal</span><span>₹${subtotal}</span></div>
+        <div class="summary-row"><span>Shipping</span><span>${shipping === 0 ? 'Free' : '₹' + shipping}</span></div>
+        ${subtotal < 1000 ? '<div class="summary-row"><span style="color:#e91e63">Add ₹' + (1000 - subtotal) + ' more for free shipping</span><span></span></div>' : ''}
+        <div class="summary-row summary-total"><span>Total</span><span>₹${total}</span></div>
+        <button class="checkout-btn" onclick="proceedToCheckout()">Proceed to Checkout →</button>
+    `;
+    updateCartCount();
+}
+
+
+function updateQuantity(index, change) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cart[index]) {
+        cart[index].quantity = Math.max(1, (cart[index].quantity || 1) + change);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        renderCartPage();
+    }
+}
+
+
+function removeCartItem(index) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCartPage();
+}
+
+
+function proceedToCheckout() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cart.length > 0) {
+        window.location.href = 'checkout.html';
+    }
+}
+
+
+renderCartPage();
+</script>
+</body>
+</html>  

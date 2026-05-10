@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Details - Noor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+.product-detail-page {
+    padding: 80px 50px;
+    min-height: 70vh;
+}
+.product-detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    background: white;
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+.product-gallery {
+    position: relative;
+}
+.main-image {
+    width: 100%;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+.thumbnail-gallery {
+    display: flex;
+    gap: 10px;
+}
+.thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+.thumbnail.active {
+    border-color: #e91e63;
+}
+.product-info-detail h1 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+.product-rating-detail {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.price-detail {
+    font-size: 28px;
+    color: #e91e63;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.product-description {
+    margin-bottom: 30px;
+    line-height: 1.8;
+    color: #666;
+}
+.product-options {
+    margin-bottom: 30px;
+}
+.option-label {
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: block;
+}
+.size-options {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.size-btn {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.size-btn.selected {
+    background: #e91e63;
+    color: white;
+    border-color: #e91e63;
+}
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+.quantity-selector button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.quantity-selector button:hover {
+    background: #e91e63;
+    color: white;
+    border-color: #e91e63;
+}
+.action-buttons {
+    display: flex;
+    gap: 15px;
+}
+.add-to-cart-detail {
+    flex: 1;
+    padding: 15px;
+    background: linear-gradient(135deg, #e91e63, #ff6b9d);
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.add-to-cart-detail:hover {
+    transform: translateY(-2px);
+}
+.buy-now {
+    flex: 1;
+    padding: 15px;
+    background: #2d2d2d;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.buy-now:hover {
+    transform: translateY(-2px);
+    background: #1a1a1a;
+}
+.wishlist-detail {
+    margin-top: 20px;
+    text-align: center;
+}
+.wishlist-detail button {
+    background: none;
+    border: none;
+    color: #e91e63;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.3s;
+}
+.wishlist-detail button:hover {
+    transform: scale(1.05);
+}
+.share-product {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+.share-product i {
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s;
+}
+.share-product i:hover {
+    color: #e91e63;
+}
+.gender-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+.gender-badge.women {
+    background: #ffe0f0;
+    color: #e91e63;
+}
+.gender-badge.men {
+    background: #e0e8ff;
+    color: #2196f3;
+}
+.gender-badge.unisex {
+    background: #e0ffe0;
+    color: #4caf50;
+}
+@media (max-width: 768px) {
+    .product-detail-container { grid-template-columns: 1fr; padding: 20px; }
+    .product-detail-page { padding: 80px 20px; }
+    .action-buttons { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+
+<nav class="navbar">
+    <div class="logo">
+        <span class="logo-icon">✨</span>
+        <span class="logo-text">Noor</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="index.html#products">Products</a>
+    </div>
+    <div class="nav-icons">
+        <i class="far fa-heart" onclick="window.location.href='wishlist.html'"></i>
+        <i class="fas fa-shopping-bag" onclick="window.location.href='cart.html'"></i>
+        <i class="far fa-user" onclick="window.location.href='login.html'"></i>
+        <i class="fas fa-venus-mars gender-toggle" onclick="toggleGenderModal()" title="Change Mode"></i>
+        <span id="cart-count-nav" class="cart-badge">0</span>
+    </div>
+    <div class="hamburger" id="hamburger">☰</div>
+</nav>
+
+
+<div class="product-detail-page">
+    <div class="product-detail-container" id="productDetailContainer">
+        <!-- Dynamic content loaded via JavaScript -->
+    </div>
+</div>
+
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Noor ✨</h3>
+            <p>For every YOU! Luxury beauty essentials.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="index.html#products">Products</a>
+            <a href="track-order.html">Track Order</a>
+        </div>
+        <div class="footer-section">
+            <h4>Customer Care</h4>
+            <a href="#">FAQ</a>
+            <a href="#">Shipping Policy</a>
+            <a href="#">Returns & Exchange</a>
+        </div>
+        <div class="footer-section">
+            <h4>Contact Us</h4>
+            <p><i class="fas fa-envelope"></i> care@noor.com</p>
+            <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2024 Noor. All rights reserved. For every YOU! ✨</p>
+    </div>
+</footer>
+
+
+<script>
+// Get product from URL parameter
+const urlParams = new URLSearchParams(window.location.search);
+const productId = parseInt(urlParams.get('id'));
+
+
+// Complete Product Database (24 products with gender tags)
+const allProducts = [
+    // WOMEN PRODUCTS (makeup, kajal, lipsticks)
+    { id: 1, name: "Classic Kajal", price: 199, category: "kajal", gender: "women", rating: 4.5, reviews: 128, image: "images/classic kajal.png", images: ["images/classic kajal.png"], description: "Smooth, long-lasting kajal perfect for all-day wear. Enriched with vitamin E and almond oil for gentle care.", sizes: ["3g", "5g", "10g"], inStock: true },
+    { id: 2, name: "Smudge Proof Kajal", price: 249, category: "kajal", gender: "women", rating: 4.7, reviews: 95, image: "images/smudgeproof kajal.png", images: ["images/smudgeproof kajal.png"], description: "Long-lasting kajal that stays put all day. Waterproof and smudge-proof formula.", sizes: ["3g", "5g"], inStock: true },
+    { id: 3, name: "Waterproof Kajal", price: 299, category: "kajal", gender: "women", rating: 4.6, reviews: 203, image: "images/waterproof kajal.jpeg", images: ["images/waterproof kajal.jpeg"], description: "Waterproof kajal that lasts all day. Perfect for humid weather and long wear.", sizes: ["3g", "5g"], inStock: true },
+    { id: 10, name: "Matte Lipstick - Ruby Red", price: 399, category: "makeup", gender: "women", rating: 4.9, reviews: 512, image: "images/Matte Lipstick - Ruby Red.png", images: ["images/Matte Lipstick - Ruby Red.png"], description: "Bold red luxury lipstick. Long-lasting matte finish with vitamin E.", sizes: ["4g"], inStock: true },
+    { id: 11, name: "Nude Lipstick", price: 299, category: "makeup", gender: "women", rating: 4.6, reviews: 234, image: "images/Nude Lipstick .png", images: ["images/Nude Lipstick .png"], description: "Everyday nude shade for natural look. Creamy texture with long-lasting wear.", sizes: ["4g"], inStock: true },
+    { id: 13, name: "Liquid Lipstick - Pink", price: 349, category: "makeup", gender: "women", rating: 4.7, reviews: 178, image: "images/Liquid Lipstick - Pink.png", images: ["images/Liquid Lipstick - Pink.png"], description: "Velvet matte liquid lipstick in beautiful pink shade. Long-lasting and comfortable wear.", sizes: ["4ml"], inStock: true },
+    { id: 14, name: "Eyeliner Pen", price: 199, category: "makeup", gender: "women", rating: 4.4, reviews: 98, image: "images/eyeliner pen.jpeg", images: ["images/eyeliner pen.jpeg"], description: "Precision eyeliner pen for perfect winged looks. Smudge-proof and long-lasting.", sizes: ["2ml"], inStock: true },
+    { id: 15, name: "Mascara - Volumizing", price: 299, category: "makeup", gender: "women", rating: 4.8, reviews: 245, image: "images/mascara.jpeg", images: ["images/mascara.jpeg"], description: "Volumizing mascara for fuller, longer lashes. Clump-free formula.", sizes: ["8ml"], inStock: true },
+    { id: 16, name: "Compact Powder", price: 449, category: "makeup", gender: "women", rating: 4.5, reviews: 189, image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400", images: ["https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400"], description: "Oil-control compact powder for flawless matte finish.", sizes: ["10g"], inStock: true },
+   
+    // UNISEX PRODUCTS (skincare, hair care - for everyone)
+    { id: 4, name: "Argan Hair Serum", price: 399, category: "hair", gender: "unisex", rating: 4.8, reviews: 312, image: "images/Argan Hair Serum.png", images: ["images/Argan Hair Serum.png"], description: "Rich argan oil for silky smooth and shiny hair. Repairs damage and reduces frizz.", sizes: ["50ml", "100ml"], inStock: true },
+    { id: 5, name: "Keratin Smooth Serum", price: 349, category: "hair", gender: "unisex", rating: 4.4, reviews: 167, image: "images/Keratin Smooth Serum.png", images: ["images/Keratin Smooth Serum.png"], description: "Keratin-infused serum for smooth, frizz-free hair. Professional salon quality.", sizes: ["50ml", "100ml"], inStock: true },
+    { id: 6, name: "Anti-Frizz Serum", price: 299, category: "hair", gender: "unisex", rating: 4.3, reviews: 89, image: "images/Anti-Frizz Serum.png", images: ["images/Anti-Frizz Serum.png"], description: "Tames frizz and flyaways instantly. Lightweight formula for all hair types.", sizes: ["50ml"], inStock: true },
+    { id: 7, name: "Ayurvedic Face Cream", price: 349, category: "skincare", gender: "unisex", rating: 4.6, reviews: 278, image: "images/Ayurvedic Face Cream.png", images: ["images/Ayurvedic Face Cream.png"], description: "Brightens skin with pure saffron. Natural Ayurvedic ingredients for glowing skin.", sizes: ["50g", "100g"], inStock: true },
+    { id: 8, name: "Hydrating Moisturizer", price: 299, category: "skincare", gender: "unisex", rating: 4.5, reviews: 198, image: "images/Hydrating Moisturizer.png", images: ["images/Hydrating Moisturizer.png"], description: "Deep hydration for soft skin. Lightweight formula with hyaluronic acid.", sizes: ["50ml", "100ml"], inStock: true },
+    { id: 9, name: "Vitamin C Moisturizer", price: 349, category: "skincare", gender: "unisex", rating: 4.7, reviews: 245, image: "images/Vitamin C Moisturizer.png", images: ["images/Vitamin C Moisturizer.png"], description: "Brightening moisturizer with Vitamin C. Reduces dark spots and evens skin tone.", sizes: ["50ml"], inStock: true },
+    { id: 12, name: "Luxury Perfume", price: 4999, category: "luxury", gender: "unisex", rating: 4.9, reviews: 89, image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400", images: ["https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400"], description: "Premium luxury fragrance with notes of jasmine and sandalwood. Long-lasting scent.", sizes: ["50ml", "100ml"], inStock: true },
+   
+    // MEN PRODUCTS (grooming, beard)
+    { id: 17, name: "Beard Oil - Classic", price: 399, category: "grooming", gender: "men", rating: 4.7, reviews: 156, image: "images/Beard Oil - Classic.png", images: ["images/Beard Oil - Classic.png"], description: "Nourishing beard oil for softer, healthier beard. Reduces itch and dandruff.", sizes: ["30ml", "50ml"], inStock: true },
+    { id: 18, name: "Beard Wash", price: 299, category: "grooming", gender: "men", rating: 4.5, reviews: 98, image: "images/Beard wash.png", images: ["images/Beard wash.png"], description: "Gentle beard wash that cleans without stripping natural oils.", sizes: ["200ml"], inStock: true },
+    { id: 19, name: "Beard Comb Set", price: 199, category: "grooming", gender: "men", rating: 4.3, reviews: 67, image: "https://images.unsplash.com/photo-1621607512022-6aecc4ced814?w=400", images: ["https://images.unsplash.com/photo-1621607512022-6aecc4ced814?w=400"], description: "Professional beard comb set for styling and detangling.", sizes: ["Set"], inStock: true },
+    { id: 20, name: "Men's Face Wash", price: 249, category: "skincare", gender: "men", rating: 4.6, reviews: 212, image: "images/Men's Face Wash.png", images: ["images/Men's Face Wash.png"], description: "Deep cleansing face wash for men. Removes oil and dirt without drying.", sizes: ["100ml"], inStock: true },
+    { id: 21, name: "Men's Moisturizer", price: 299, category: "skincare", gender: "men", rating: 4.5, reviews: 145, image: "images/Men's Moisturizer.png", images: ["images/Men's Moisturizer.png"], description: "Lightweight moisturizer for men. Non-greasy formula with SPF.", sizes: ["50ml", "100ml"], inStock: true },
+    { id: 22, name: "After Shave Balm", price: 349, category: "grooming", gender: "men", rating: 4.4, reviews: 89, image: "https://images.unsplash.com/photo-1621607512022-6aecc4ced814?w=400", images: ["https://images.unsplash.com/photo-1621607512022-6aecc4ced814?w=400"], description: "Soothing after shave balm that calms irritation and moisturizes.", sizes: ["100ml"], inStock: true },
+    { id: 23, name: "Hair Wax - Strong Hold", price: 299, category: "hair", gender: "men", rating: 4.6, reviews: 134, image: "https://images.unsplash.com/photo-1522338140262-f46f5913618a?w=400", images: ["https://images.unsplash.com/photo-1522338140262-f46f5913618a?w=400"], description: "Strong hold hair wax for all-day styling. Matte finish.", sizes: ["75g"], inStock: true },
+    { id: 24, name: "Men's Deodorant", price: 399, category: "luxury", gender: "men", rating: 4.8, reviews: 178, image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400", images: ["https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400"], description: "Long-lasting deodorant with fresh, masculine scent. 24-hour protection.", sizes: ["150ml"], inStock: true }
+];
+
+
+// Find product by ID, show error if not found
+let product = allProducts.find(p => p.id === productId);
+let selectedSize = product && product.sizes ? product.sizes[0] : '';
+let quantity = 1;
+
+
+// Helper function to show notification
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+            <span>${message}</span>
+        </div>
+    `;
+   
+    if (!document.querySelector('#notification-styles-detail')) {
+        const style = document.createElement('style');
+        style.id = 'notification-styles-detail';
+        style.textContent = `
+            .notification {
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: white;
+                padding: 15px 25px;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                z-index: 10000;
+                animation: slideInRight 0.3s ease;
+                border-left: 4px solid;
+            }
+            .notification-success { border-left-color: #4caf50; }
+            .notification-error { border-left-color: #ff4444; }
+            .notification-info { border-left-color: #2196f3; }
+            .notification-content { display: flex; align-items: center; gap: 10px; }
+            @keyframes slideInRight {
+                from { opacity: 0; transform: translateX(100px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+   
+    document.body.appendChild(notification);
+   
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+
+
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCountElements = document.querySelectorAll('#cart-count, #cart-count-nav');
+    cartCountElements.forEach(el => {
+        if (el) el.innerText = cart.length;
+    });
+}
+
+
+function getGenderBadge(gender) {
+    if (gender === 'women') {
+        return '<span class="gender-badge women">👩 Women</span>';
+    } else if (gender === 'men') {
+        return '<span class="gender-badge men">👨 Men</span>';
+    } else {
+        return '<span class="gender-badge unisex">🌍 Unisex</span>';
+    }
+}
+
+
+function renderProductDetail() {
+    const container = document.getElementById('productDetailContainer');
+    if (!container) return;
+   
+    if (!product) {
+        container.innerHTML = `
+            <div style="text-align: center; padding: 60px;">
+                <i class="fas fa-exclamation-triangle" style="font-size: 60px; color: #e91e63;"></i>
+                <h2>Product Not Found</h2>
+                <p>The product you're looking for doesn't exist or has been removed.</p>
+                <button class="add-to-cart-detail" style="margin-top: 20px;" onclick="window.location.href='index.html'">Back to Shop</button>
+            </div>
+        `;
+        return;
+    }
+   
+    // Generate stars HTML
+    const fullStars = Math.floor(product.rating);
+    const emptyStars = 5 - fullStars;
+    const stars = '★'.repeat(fullStars) + '☆'.repeat(emptyStars);
+   
+    // Size options HTML
+    let sizeHtml = '';
+    if (product.sizes && product.sizes.length > 0) {
+        sizeHtml = `
+            <div class="product-options">
+                <label class="option-label">Select Size</label>
+                <div class="size-options">
+                    ${product.sizes.map(size => `<button class="size-btn ${selectedSize === size ? 'selected' : ''}" onclick="selectSize('${size}')">${size}</button>`).join('')}
+                </div>
+            </div>
+        `;
+    }
+   
+    container.innerHTML = `
+        <div class="product-gallery">
+            <img src="${product.image}" alt="${product.name}" class="main-image" id="mainImage">
+            <div class="thumbnail-gallery" id="thumbnailGallery">
+                ${product.images && product.images.length > 0 ? product.images.map(img => `<img src="${img}" class="thumbnail" onclick="changeImage('${img}')">`).join('') : ''}
+            </div>
+        </div>
+        <div class="product-info-detail">
+            <h1>${product.name} ${getGenderBadge(product.gender)}</h1>
+            <div class="product-rating-detail">
+                <div class="stars" style="color: #ffc107;">${stars}</div>
+                <span>${product.rating} (${product.reviews} reviews)</span>
+                <span class="in-stock" style="color: #4caf50;">✓ In Stock</span>
+            </div>
+            <div class="price-detail">₹${product.price}</div>
+            <div class="product-description">
+                <p>${product.description}</p>
+            </div>
+            ${sizeHtml}
+            <div class="quantity-selector">
+                <label class="option-label">Quantity</label>
+                <button onclick="updateQuantity(-1)">-</button>
+                <span id="quantityValue" style="min-width: 40px; text-align: center;">${quantity}</span>
+                <button onclick="updateQuantity(1)">+</button>
+            </div>
+            <div class="action-buttons">
+                <button class="add-to-cart-detail" onclick="addToCartDetail()">Add to Cart 🛒</button>
+                <button class="buy-now" onclick="buyNow()">Buy Now →</button>
+            </div>
+            <div class="wishlist-detail">
+                <button onclick="addToWishlist()"><i class="far fa-heart"></i> Add to Wishlist</button>
+            </div>
+            <div class="share-product">
+                <span>Share this product:</span>
+                <i class="fab fa-facebook" onclick="shareProduct('facebook')"></i>
+                <i class="fab fa-twitter" onclick="shareProduct('twitter')"></i>
+                <i class="fab fa-whatsapp" onclick="shareProduct('whatsapp')"></i>
+                <i class="fas fa-link" onclick="copyProductLink()"></i>
+            </div>
+        </div>
+    `;
+}
+
+
+function selectSize(size) {
+    selectedSize = size;
+    // Update UI without re-rendering everything
+    document.querySelectorAll('.size-btn').forEach(btn => {
+        if (btn.innerText === size) {
+            btn.classList.add('selected');
+        } else {
+            btn.classList.remove('selected');
+        }
+    });
+}
+
+
+function updateQuantity(change) {
+    quantity = Math.max(1, quantity + change);
+    const quantitySpan = document.getElementById('quantityValue');
+    if (quantitySpan) quantitySpan.innerText = quantity;
+}
+
+
+function changeImage(imgSrc) {
+    const mainImage = document.getElementById('mainImage');
+    if (mainImage) mainImage.src = imgSrc;
+   
+    // Update active thumbnail
+    document.querySelectorAll('.thumbnail').forEach(thumb => {
+        thumb.classList.remove('active');
+        if (thumb.src === imgSrc) {
+            thumb.classList.add('active');
+        }
+    });
+}
+
+
+// Add to Cart function
+function addToCartDetail() {
+    if (!product) return;
+   
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+   
+    // Create cart item
+    const cartItem = {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        quantity: quantity,
+        size: selectedSize,
+        gender: product.gender,
+        description: product.description.substring(0, 50) + '...'
+    };
+   
+    // Check if item already exists (with same size if applicable)
+    const existingItem = cart.find(item =>
+        item.id === product.id &&
+        (product.sizes && product.sizes.length > 0 ? item.size === selectedSize : true)
+    );
+   
+    if (existingItem) {
+        existingItem.quantity += quantity;
+    } else {
+        cart.push(cartItem);
+    }
+   
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+   
+    // Show success animation
+    showAddToCartAnimation();
+    showNotification(`${product.name} added to cart! 🛒`, 'success');
+}
+
+
+// Buy Now function
+function buyNow() {
+    if (!product) return;
+   
+    // First add to cart
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+   
+    const cartItem = {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        quantity: quantity,
+        size: selectedSize,
+        gender: product.gender,
+        description: product.description.substring(0, 50) + '...'
+    };
+   
+    const existingItem = cart.find(item =>
+        item.id === product.id &&
+        (product.sizes && product.sizes.length > 0 ? item.size === selectedSize : true)
+    );
+   
+    if (existingItem) {
+        existingItem.quantity += quantity;
+    } else {
+        cart.push(cartItem);
+    }
+   
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+   
+    // Redirect to checkout page
+    window.location.href = 'checkout.html';
+}
+
+
+function showAddToCartAnimation() {
+    const floatingCart = document.querySelector('.floating-cart');
+    if (floatingCart) {
+        floatingCart.style.transform = 'scale(1.2)';
+        setTimeout(() => {
+            floatingCart.style.transform = 'scale(1)';
+        }, 300);
+    }
+}
+
+
+function addToWishlist() {
+    if (!product) return;
+   
+    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    const exists = wishlist.some(item => item.id === product.id);
+   
+    if (!exists) {
+        wishlist.push({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            gender: product.gender
+        });
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        showNotification(`${product.name} added to wishlist! ❤️`, 'success');
+    } else {
+        showNotification('Product already in wishlist!', 'info');
+    }
+}
+
+
+function shareProduct(platform) {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent(`Check out ${product.name} on Noor!`);
+   
+    const shareUrls = {
+        facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+        twitter: `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
+        whatsapp: `https://wa.me/?text=${text}%20${url}`
+    };
+   
+    window.open(shareUrls[platform], '_blank', 'width=600,height=400');
+}
+
+
+function copyProductLink() {
+    navigator.clipboard.writeText(window.location.href);
+    showNotification('Product link copied to clipboard!', 'success');
+}
+
+
+function toggleGenderModal() {
+    window.location.href = 'index.html';
+}
+
+
+// Initialize page
+renderProductDetail();
+updateCartCount();
+
+
+// Update cart count when cart changes in another tab
+window.addEventListener('storage', function(e) {
+    if (e.key === 'cart') {
+        updateCartCount();
+    }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track Order - Noor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+.track-page {
+    padding: 80px 50px;
+    min-height: 70vh;
+    background: linear-gradient(135deg, #fff0f5, #ffe4ec);
+}
+.track-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+.track-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.track-header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+.track-input-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+.track-input-group input {
+    flex: 1;
+    padding: 15px;
+    border: 2px solid #eee;
+    border-radius: 15px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+}
+.track-input-group button {
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #e91e63, #ff6b9d);
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+.order-status {
+    display: none;
+    margin-top: 30px;
+}
+.status-timeline {
+    position: relative;
+    padding: 20px 0;
+}
+.status-step {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+.status-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    z-index: 2;
+    transition: all 0.3s;
+}
+.status-icon.completed {
+    background: #4caf50;
+    color: white;
+}
+.status-icon.current {
+    background: #e91e63;
+    color: white;
+    animation: pulse 1.5s infinite;
+}
+.status-content {
+    flex: 1;
+}
+.status-content h4 {
+    margin-bottom: 5px;
+}
+.status-content p {
+    color: #666;
+    font-size: 14px;
+}
+.status-line {
+    position: absolute;
+    left: 25px;
+    top: 50px;
+    width: 2px;
+    height: calc(100% - 50px);
+    background: #eee;
+    z-index: 1;
+}
+.status-line.completed {
+    background: #4caf50;
+}
+.order-details {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 30px;
+}
+.order-details h3 {
+    margin-bottom: 15px;
+}
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+</style>
+</head>
+<body>
+
+
+<nav class="navbar">
+    <div class="logo">
+        <span class="logo-icon">✨</span>
+        <span class="logo-text">Noor</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="index.html#products">Products</a>
+        <a href="index.html#reviews">Reviews</a>
+    </div>
+    <div class="nav-icons">
+        <i class="far fa-heart" onclick="window.location.href='wishlist.html'"></i>
+        <i class="fas fa-shopping-bag" onclick="window.location.href='cart.html'"></i>
+        <i class="far fa-user" onclick="window.location.href='login.html'"></i>
+    </div>
+    <div class="hamburger" id="hamburger">☰</div>
+</nav>
+
+
+<div class="track-page">
+    <div class="track-container">
+        <div class="track-header">
+            <h1>Track Your Order 📦</h1>
+            <p>Enter your order ID to track your delivery</p>
+        </div>
+       
+        <div class="track-input-group">
+            <input type="text" id="orderIdInput" placeholder="Enter Order ID (e.g., NOOR123456)">
+            <button onclick="trackOrder()">Track Order →</button>
+        </div>
+       
+        <div id="orderStatus" class="order-status"></div>
+    </div>
+</div>
+
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Noor ✨</h3>
+            <p>For every YOU! Luxury beauty essentials.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="track-order.html">Track Order</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2024 Noor. All rights reserved.</p>
+    </div>
+</footer>
+
+
+<script>
+function trackOrder() {
+    const orderId = document.getElementById('orderIdInput').value.trim();
+    if (!orderId) {
+        alert('Please enter your Order ID');
+        return;
+    }
+   
+    // Get orders from localStorage
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    const order = orders.find(o => o.orderId === orderId);
+   
+    const statusDiv = document.getElementById('orderStatus');
+   
+    if (!order) {
+        statusDiv.innerHTML = `
+            <div style="text-align: center; padding: 40px;">
+                <i class="fas fa-search" style="font-size: 60px; color: #ccc;"></i>
+                <h3>Order Not Found</h3>
+                <p>Please check your Order ID and try again</p>
+            </div>
+        `;
+        statusDiv.style.display = 'block';
+        return;
+    }
+   
+    // Status steps
+    const steps = [
+        { name: 'Order Confirmed', status: 'order_confirmed', desc: 'Your order has been confirmed' },
+        { name: 'Processing', status: 'processing', desc: 'Your order is being processed' },
+        { name: 'Shipped', status: 'shipped', desc: 'Your order has been shipped' },
+        { name: 'Out for Delivery', status: 'out_for_delivery', desc: 'Your order is out for delivery' },
+        { name: 'Delivered', status: 'delivered', desc: 'Your order has been delivered' }
+    ];
+   
+    const currentStatus = order.status || 'order_confirmed';
+    const currentIndex = steps.findIndex(s => s.status === currentStatus);
+   
+    let stepsHtml = '<div class="status-timeline">';
+    steps.forEach((step, index) => {
+        let stepClass = '';
+        let lineClass = '';
+        if (index < currentIndex) {
+            stepClass = 'completed';
+            lineClass = 'completed';
+        } else if (index === currentIndex) {
+            stepClass = 'current';
+        }
+       
+        stepsHtml += `
+            <div class="status-step">
+                <div class="status-icon ${stepClass}">
+                    ${index < currentIndex ? '<i class="fas fa-check"></i>' : (index === currentIndex ? '<i class="fas fa-spinner fa-pulse"></i>' : '<i class="fas fa-circle"></i>')}
+                </div>
+                <div class="status-content">
+                    <h4>${step.name}</h4>
+                    <p>${step.desc}</p>
+                </div>
+                ${index < steps.length - 1 ? `<div class="status-line ${lineClass}"></div>` : ''}
+            </div>
+        `;
+    });
+    stepsHtml += '</div>';
+   
+    // Order details
+    let itemsHtml = '';
+    order.items.forEach(item => {
+        itemsHtml += `
+            <div class="order-item">
+                <span>${item.name} x ${item.quantity}</span>
+                <span>₹${item.price * item.quantity}</span>
+            </div>
+        `;
+    });
+   
+    statusDiv.innerHTML = `
+        <h3 style="margin-bottom: 20px;">Order #${order.orderId}</h3>
+        ${stepsHtml}
+        <div class="order-details">
+            <h3>Order Summary</h3>
+            ${itemsHtml}
+            <div class="order-item" style="font-weight: 600; border-bottom: none;">
+                <span>Total</span>
+                <span>₹${order.total}</span>
+            </div>
+            <div class="order-item" style="border-bottom: none;">
+                <span>Shipping Address</span>
+                <span>${order.address}</span>
+            </div>
+            <div class="order-item" style="border-bottom: none;">
+                <span>Estimated Delivery</span>
+                <span>${order.estimatedDelivery || '3-5 business days'}</span>
+            </div>
+        </div>
+    `;
+    statusDiv.style.display = 'block';
+}
+</script>
+</body>
+</html>  
+
+

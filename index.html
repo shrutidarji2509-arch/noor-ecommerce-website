@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noor - For every YOU! | Luxury Beauty Destination</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+/* Additional Hero Styles - Pink Luxury Theme */
+.hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #fff0f5 0%, #ffe4ec 25%, #ffd9e6 50%, #ffe4ec 75%, #fff0f5 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 12s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.floating-elements {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.floating-element {
+    position: absolute;
+    opacity: 0.2;
+    animation: floatAround 20s infinite linear;
+}
+
+.floating-element i {
+    font-size: 50px;
+    color: #e91e63;
+}
+
+@keyframes floatAround {
+    0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    25% { transform: translate(40px, 25px) rotate(90deg) scale(1.1); }
+    50% { transform: translate(80px, 0) rotate(180deg) scale(1); }
+    75% { transform: translate(40px, -25px) rotate(270deg) scale(0.9); }
+    100% { transform: translate(0, 0) rotate(360deg) scale(1); }
+}
+
+.hero-content-wrapper {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(233,30,99,0.1);
+    backdrop-filter: blur(10px);
+    padding: 8px 24px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #e91e63;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+    animation: fadeInDown 0.8s ease;
+    border: 1px solid rgba(233,30,99,0.2);
+}
+
+.hero-title {
+    font-size: 72px;
+    font-family: 'Playfair Display', serif;
+    color: #2d2d2d;
+    margin-bottom: 20px;
+    animation: fadeInUp 0.8s ease;
+}
+
+.hero-title span {
+    background: linear-gradient(135deg, #e91e63, #ff6b9d, #d4af37);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 35px;
+    line-height: 1.6;
+    animation: fadeInUp 0.8s ease 0.1s backwards;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    animation: fadeInUp 0.8s ease 0.2s backwards;
+}
+
+.hero-btn-primary {
+    padding: 14px 38px;
+    background: linear-gradient(135deg, #e91e63, #ff6b9d);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 5px 20px rgba(233,30,99,0.3);
+}
+
+.hero-btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(233,30,99,0.4);
+}
+
+.hero-btn-secondary {
+    padding: 14px 38px;
+    background: transparent;
+    border: 2px solid #e91e63;
+    border-radius: 50px;
+    color: #e91e63;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.hero-btn-secondary:hover {
+    background: rgba(233,30,99,0.08);
+    transform: translateY(-3px);
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 60px;
+    animation: fadeInUp 0.8s ease 0.3s backwards;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 32px;
+    font-weight: 700;
+    color: #e91e63;
+    display: block;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: #888;
+    margin-top: 5px;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 42px;
+    }
+    .hero-subtitle {
+        font-size: 15px;
+    }
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    .hero-stats {
+        gap: 25px;
+        flex-wrap: wrap;
+        margin-top: 40px;
+    }
+    .stat-number {
+        font-size: 22px;
+    }
+    .stat-label {
+        font-size: 11px;
+    }
+    .hero-badge {
+        font-size: 11px;
+        padding: 6px 18px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- Gender Selection Modal -->
+<div id="genderModal" class="gender-modal">
+    <div class="gender-modal-content">
+        <button class="skip-btn" onclick="closeGenderModal()">Skip →</button>
+        <h2>Welcome to <span class="noor-text">Noor</span></h2>
+        <p class="tagline">For every YOU! ✨</p>
+        <div class="gender-options">
+            <div class="gender-card" onclick="selectGender('women')">
+                <div class="gender-icon">🌸</div>
+                <h3>Women</h3>
+                <p>Beauty & Glamour</p>
+            </div>
+            <div class="gender-card" onclick="selectGender('men')">
+                <div class="gender-icon">💪</div>
+                <h3>Men</h3>
+                <p>Grooming & Style</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar" id="navbar">
+    <div class="logo">
+        <span class="logo-icon">✨</span>
+        <span class="logo-text">Noor</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="#products">Products</a>
+        <a href="#new-arrivals">New Arrivals</a>
+        <a href="#best-sellers">Best Sellers</a>
+        <a href="#reviews">Reviews</a>
+        <a href="contact.html">Contact</a>
+        <a href="track-order.html" class="track-order-nav">📦 Track Order</a>
+    </div>
+    <div class="nav-icons">
+        <i class="fas fa-search" onclick="openSearch()"></i>
+        <i class="far fa-heart" onclick="window.location.href='wishlist.html'"></i>
+        <i class="fas fa-shopping-bag" onclick="window.location.href='cart.html'"></i>
+        <i class="far fa-user" onclick="window.location.href='login.html'"></i>
+        <i class="fas fa-venus-mars gender-toggle" onclick="toggleGenderModal()" title="Change Mode"></i>
+        <!-- Logout icon - initially hidden, shown when user is logged in -->
+        <i class="fas fa-sign-out-alt logout-nav" id="logoutNavIcon" style="display: none;" onclick="handleLogoutClick()" title="Logout"></i>
+        <span id="cart-count-nav" class="cart-badge">0</span>
+    </div>
+    <div class="hamburger" id="hamburger">☰</div>
+</nav>
+
+<!-- Hero Section - Gender Based -->
+<section class="hero" id="home" data-gender="women">
+    <div class="hero-background">
+        <div class="floating-elements" id="floatingElements">
+            <!-- Elements will be added dynamically via JavaScript -->
+        </div>
+    </div>
+   
+    <div class="hero-content-wrapper">
+        <div class="hero-badge" id="heroBadge">
+            ✨ LUXURY BEAUTY DESTINATION ✨
+        </div>
+        <h1 class="hero-title" id="heroTitle">
+            Discover Your <span>True Glow</span>
+        </h1>
+        <p class="hero-subtitle" id="heroSubtitle">
+            Experience the finest luxury beauty essentials crafted with love. <br>
+            For every you, for every moment.
+        </p>
+        <div class="hero-buttons">
+            <button class="hero-btn-primary" onclick="scrollToProducts()">
+                Shop Now <i class="fas fa-arrow-right"></i>
+            </button>
+            <button class="hero-btn-secondary" onclick="window.location.href='#new-arrivals'">
+                Explore Collections <i class="fas fa-sparkle"></i>
+            </button>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <span class="stat-number">10K+</span>
+                <span class="stat-label">Happy Customers</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Luxury Products</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">Customer Support</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">Free</span>
+                <span class="stat-label">Shipping ₹999+</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Categories with Animations -->
+<section class="categories">
+    <div class="section-container">
+        <div class="category-grid">
+            <div class="category-item" onclick="filterProducts('kajal')">
+                <div class="category-icon">
+                    <i class="fas fa-eye"></i>
+                    <div class="ripple"></div>
+                </div>
+                <h4>Kajal</h4>
+            </div>
+            <div class="category-item" onclick="filterProducts('hair')">
+                <div class="category-icon">
+                    <i class="fas fa-cut"></i>
+                </div>
+                <h4>Hair Care</h4>
+            </div>
+            <div class="category-item" onclick="filterProducts('skincare')">
+                <div class="category-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h4>Skincare</h4>
+            </div>
+            <div class="category-item" onclick="filterProducts('makeup')">
+                <div class="category-icon">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <h4>Makeup</h4>
+            </div>
+            <div class="category-item" onclick="filterProducts('grooming')">
+                <div class="category-icon">
+                    <i class="fas fa-spray-can"></i>
+                </div>
+                <h4>Grooming</h4>
+            </div>
+            <div class="category-item" onclick="filterProducts('luxury')">
+                <div class="category-icon">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <h4>Luxury</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Products Section -->
+<section class="products" id="products">
+    <div class="section-container">
+        <div class="section-header">
+            <h2>Featured <span class="gradient-text">Products</span></h2>
+            <p>Discover our most loved beauty essentials</p>
+        </div>
+        <div class="product-grid" id="productGrid"></div>
+    </div>
+</section>
+
+<!-- New Arrivals -->
+<section class="new-arrivals" id="new-arrivals">
+    <div class="section-container">
+        <div class="section-header">
+            <h2>New <span class="gradient-text">Arrivals</span></h2>
+            <p>Fresh drops just for you</p>
+        </div>
+        <div class="product-grid" id="newArrivalsGrid"></div>
+    </div>
+</section>
+
+<!-- Best Sellers -->
+<section class="best-sellers" id="best-sellers">
+    <div class="section-container">
+        <div class="section-header">
+            <h2>Best <span class="gradient-text">Sellers</span></h2>
+            <p>What everyone's loving right now</p>
+        </div>
+        <div class="product-grid" id="bestSellersGrid"></div>
+    </div>
+</section>
+
+<!-- Happy Customers Gallery -->
+<section class="happy-customers">
+    <div class="section-container">
+        <div class="section-header">
+            <h2>Happy <span class="gradient-text">Customers</span></h2>
+            <p>Real people, real results ✨</p>
+        </div>
+        <div class="customers-gallery">
+            <div class="customer-card"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300" alt="Customer"><div class="customer-overlay"><i class="fas fa-heart"></i> Loving Noor!</div></div>
+            <div class="customer-card"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300" alt="Customer"><div class="customer-overlay"><i class="fas fa-star"></i> 5 Stars!</div></div>
+            <div class="customer-card"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=300" alt="Customer"><div class="customer-overlay"><i class="fas fa-smile"></i> Amazing!</div></div>
+            <div class="customer-card"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=300" alt="Customer"><div class="customer-overlay"><i class="fas fa-gem"></i> Luxury Feel</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Reviews Section -->
+<section class="reviews" id="reviews">
+    <div class="section-container">
+        <div class="section-header">
+            <h2>What Our <span class="gradient-text">Customers Say</span></h2>
+            <p>Over 10,000+ happy customers</p>
+        </div>
+        <div class="reviews-grid" id="reviewsGrid"></div>
+        <div class="add-review">
+            <h3>Share Your Experience</h3>
+            <div class="star-rating" id="starRating">
+                <i class="far fa-star" data-rating="1"></i>
+                <i class="far fa-star" data-rating="2"></i>
+                <i class="far fa-star" data-rating="3"></i>
+                <i class="far fa-star" data-rating="4"></i>
+                <i class="far fa-star" data-rating="5"></i>
+            </div>
+            <textarea id="reviewText" placeholder="Write your review..."></textarea>
+            <input type="text" id="reviewerName" placeholder="Your name">
+            <button onclick="submitReview()" class="submit-review">Submit Review <i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+</section>
+
+<!-- Advertisement Banner -->
+<section class="ad-banner">
+    <div class="ad-content">
+        <div class="ad-text">
+            <span class="ad-badge">Limited Time Offer</span>
+            <h2>Buy 2 Get 1 Free</h2>
+            <p>On all Noor Signature Products</p>
+            <button class="ad-btn" onclick="window.location.href='products.html'">Shop Now <i class="fas fa-arrow-right"></i></button>
+        </div>
+        <div class="ad-offer">🔥</div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Noor ✨</h3>
+            <p>For every YOU! Luxury beauty essentials crafted with love.</p>
+            <div class="social-icons">
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#reviews">Reviews</a>
+            <a href="track-order.html">Track Order</a>
+        </div>
+        <div class="footer-section">
+            <h4>Customer Care</h4>
+            <a href="#">FAQ</a>
+            <a href="#">Shipping Policy</a>
+            <a href="#">Returns & Exchange</a>
+            <a href="#">Terms & Conditions</a>
+        </div>
+        <div class="footer-section">
+            <h4>Contact Us</h4>
+            <p><i class="fas fa-envelope"></i> care@noor.com</p>
+            <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2024 Noor. All rights reserved. For every YOU! ✨</p>
+    </div>
+</footer>
+
+<!-- AI Chatbot -->
+<div class="chatbot" id="chatbot">
+    <div class="chatbot-header" onclick="toggleChat()">
+        <i class="fas fa-robot"></i>
+        <span>Noor Assistant</span>
+        <i class="fas fa-chevron-down" id="chatToggleIcon"></i>
+    </div>
+    <div class="chatbot-body" id="chatBody">
+        <div class="chat-messages" id="chatMessages">
+            <div class="bot-message">✨ Hello! I'm Noor's AI assistant. How can I help you today?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Ask me anything...">
+            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+</div>
+
+<!-- Floating Cart -->
+<div class="floating-cart" onclick="window.location.href='cart.html'">
+    🛒 <span id="cart-count">0</span>
+</div>
+
+<script src="script.js"></script>
+<script>
+// Complete product database for rendering
+const productsDatabase = [
+    { id: 1, name: "Classic Kajal", price: 199, category: "kajal", gender: "women", rating: 4.5, reviews: 128, image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=300", badge: "Best Seller", isNew: false, sales: 500 },
+    { id: 2, name: "Smudge Proof Kajal", price: 249, category: "kajal", gender: "women", rating: 4.7, reviews: 95, image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=300", badge: "", isNew: true, sales: 300 },
+    { id: 3, name: "Waterproof Kajal", price: 299, category: "kajal", gender: "women", rating: 4.6, reviews: 203, image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=300", badge: "", isNew: false, sales: 450 },
+    { id: 4, name: "Argan Hair Serum", price: 399, category: "hair", gender: "unisex", rating: 4.8, reviews: 312, image: "https://images.unsplash.com/photo-1522338140262-f46f5913618a?w=300", badge: "Top Rated", isNew: false, sales: 800 },
+    { id: 7, name: "Ayurvedic Face Cream", price: 349, category: "skincare", gender: "unisex", rating: 4.6, reviews: 278, image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=300", badge: "Organic", isNew: false, sales: 600 },
+    { id: 10, name: "Matte Lipstick - Ruby Red", price: 399, category: "makeup", gender: "women", rating: 4.9, reviews: 512, image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=300", badge: "Bestseller", isNew: false, sales: 1200 },
+    { id: 17, name: "Beard Oil - Classic", price: 399, category: "grooming", gender: "men", rating: 4.7, reviews: 156, image: "https://images.unsplash.com/photo-1621607512022-6aecc4ced814?w=300", badge: "Men's Choice", isNew: false, sales: 450 },
+    { id: 12, name: "Luxury Perfume", price: 4999, category: "luxury", gender: "unisex", rating: 4.9, reviews: 89, image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=300", badge: "Premium", isNew: false, sales: 150 }
+];
+
+function getFilteredProducts() {
+    const selectedGender = localStorage.getItem('genderSelected');
+    if (!selectedGender || selectedGender === 'null') return productsDatabase;
+    if (selectedGender === 'women') return productsDatabase.filter(p => p.gender === 'women' || p.gender === 'unisex');
+    if (selectedGender === 'men') return productsDatabase.filter(p => p.gender === 'men' || p.gender === 'unisex');
+    return productsDatabase;
+}
+
+function loadFeaturedProducts() {
+    const container = document.getElementById('productGrid');
+    if (!container) return;
+    const filtered = getFilteredProducts().slice(0, 8);
+    container.innerHTML = filtered.map(product => createProductCard(product)).join('');
+}
+
+function loadNewArrivals() {
+    const container = document.getElementById('newArrivalsGrid');
+    if (!container) return;
+    const filtered = getFilteredProducts().filter(p => p.isNew).slice(0, 4);
+    container.innerHTML = filtered.map(product => createProductCard(product)).join('');
+}
+
+function loadBestSellers() {
+    const container = document.getElementById('bestSellersGrid');
+    if (!container) return;
+    const filtered = getFilteredProducts().sort((a,b) => b.sales - a.sales).slice(0, 4);
+    container.innerHTML = filtered.map(product => createProductCard(product)).join('');
+}
+
+function createProductCard(product) {
+    const stars = '★'.repeat(Math.floor(product.rating)) + '☆'.repeat(5 - Math.floor(product.rating));
+    return `
+        <div class="product-card" data-id="${product.id}" data-category="${product.category}">
+            ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+            <div class="wishlist-btn" onclick="event.stopPropagation(); toggleWishlist(${product.id})">
+                <i class="far fa-heart"></i>
+            </div>
+            <img src="${product.image}" alt="${product.name}" onclick="viewProduct(${product.id})">
+            <div class="product-info">
+                <h3 onclick="viewProduct(${product.id})">${product.name}</h3>
+                <div class="product-rating"><div class="stars">${stars}</div><span class="rating-count">(${product.reviews})</span></div>
+                <div class="product-price">₹${product.price}</div>
+                <button class="add-to-cart" onclick="event.stopPropagation(); addToCart('${product.name}', ${product.price}, '${product.image}', '${product.name}')">Add to Cart 🛒</button>
+            </div>
+        </div>
+    `;
+}
+
+function viewProduct(id) { window.location.href = `product-detail.html?id=${id}`; }
+function toggleWishlist(id) { alert("Wishlist feature: " + id); }
+function addToCart(name, price, image) { alert(`${name} added to cart!`); updateCartCount(); }
+function scrollToProducts() { document.getElementById('products').scrollIntoView({ behavior: 'smooth' }); }
+function filterProducts(cat) { alert(`Filter by: ${cat}`); }
+function openSearch() { alert("🔍 Search products (Kajal, Lipstick, Serum)"); }
+function toggleChat() { const b = document.getElementById('chatBody'); if(b) b.style.display = b.style.display === 'none' ? 'flex' : 'none'; }
+function sendMessage() { const i = document.getElementById('chatInput'); if(i && i.value.trim()) alert("Bot: " + i.value); }
+function submitReview() { alert("Thank you for your review!"); }
+function updateCartCount() { const c = document.getElementById('cart-count'); if(c) c.innerText = "0"; const cn = document.getElementById('cart-count-nav'); if(cn) cn.innerText = "0"; }
+function selectGender(g) { localStorage.setItem('genderSelected', g); closeGenderModal(); updateHeroForGender(g); loadFeaturedProducts(); loadNewArrivals(); loadBestSellers(); }
+function closeGenderModal() { document.getElementById('genderModal').style.display = 'none'; }
+function toggleGenderModal() { document.getElementById('genderModal').style.display = 'flex'; }
+function updateHeroForGender(gender) {
+    const badge = document.getElementById('heroBadge');
+    const title = document.getElementById('heroTitle');
+    const subtitle = document.getElementById('heroSubtitle');
+    const hero = document.getElementById('home');
+    if(gender === 'women') {
+        badge.innerHTML = '🌸 LUXURY BEAUTY DESTINATION 🌸';
+        title.innerHTML = 'Discover Your <span>True Glow</span>';
+        subtitle.innerHTML = 'Experience the finest luxury beauty essentials crafted with love.<br>For every you, for every moment.';
+        if(hero) hero.setAttribute('data-gender', 'women');
+    } else {
+        badge.innerHTML = '💪 PREMIUM GROOMING DESTINATION 💪';
+        title.innerHTML = 'Unleash Your <span>Best Self</span>';
+        subtitle.innerHTML = 'Premium grooming essentials for the modern man.<br>Style, confidence, and excellence.';
+        if(hero) hero.setAttribute('data-gender', 'men');
+    }
+}
+function initHamburger() {
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    if(hamburger && navLinks) hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
+}
+function updateNavbarForLogin() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const logoutIcon = document.getElementById('logoutNavIcon');
+    const userIcon = document.querySelector('.nav-icons .fa-user');
+    if(currentUser && currentUser.isLoggedIn) {
+        if(logoutIcon) logoutIcon.style.display = 'inline-block';
+        if(userIcon) {
+            userIcon.classList.remove('fa-user');
+            userIcon.classList.add('fa-user-check');
+            userIcon.onclick = () => showUserMenu();
+        }
+    } else {
+        if(logoutIcon) logoutIcon.style.display = 'none';
+        if(userIcon) {
+            userIcon.classList.remove('fa-user-check');
+            userIcon.classList.add('fa-user');
+            userIcon.onclick = () => window.location.href = 'login.html';
+        }
+    }
+}
+function showUserMenu() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if(!currentUser) return;
+    let menu = document.querySelector('.user-menu');
+    if(menu) menu.remove();
+    menu = document.createElement('div');
+    menu.className = 'user-menu';
+    menu.innerHTML = `
+        <div class="user-menu-content">
+            <div class="user-info"><strong>${currentUser.name}</strong><small>${currentUser.email}</small></div>
+            <div class="user-menu-divider"></div>
+            <div class="user-menu-item" onclick="window.location.href='track-order.html'"><i class="fas fa-truck"></i> Track Orders</div>
+            <div class="user-menu-item" onclick="window.location.href='wishlist.html'"><i class="fas fa-heart"></i> Wishlist</div>
+            <div class="user-menu-divider"></div>
+            <div class="user-menu-item logout" onclick="performLogout()"><i class="fas fa-sign-out-alt"></i> Logout</div>
+        </div>
+    `;
+    document.body.appendChild(menu);
+    setTimeout(() => document.addEventListener('click', function closeMenu(e) { if(menu && !menu.contains(e.target) && !e.target.classList?.contains('fa-user-check')) { menu.remove(); document.removeEventListener('click', closeMenu); } }), 100);
+}
+function performLogout() {
+    localStorage.removeItem('currentUser');
+    updateNavbarForLogin();
+    alert("Logged out successfully!");
+    window.location.href = 'index.html';
+}
+function handleLogoutClick() { performLogout(); }
+function addLogoutLinkToNav() {
+    const trackLink = document.querySelector('.nav-links a[href="track-order.html"]');
+    if(!trackLink) {
+        const navLinksDiv = document.getElementById('navLinks');
+        if(navLinksDiv && !navLinksDiv.querySelector('.track-order-nav')) {
+            const newTrackLink = document.createElement('a');
+            newTrackLink.href = 'track-order.html';
+            newTrackLink.className = 'track-order-nav';
+            newTrackLink.innerHTML = '📦 Track Order';
+            navLinksDiv.appendChild(newTrackLink);
+        }
+    }
+}
+document.addEventListener('DOMContentLoaded', function() {
+    initHamburger();
+    loadFeaturedProducts();
+    loadNewArrivals();
+    loadBestSellers();
+    updateCartCount();
+    updateNavbarForLogin();
+    addLogoutLinkToNav();
+    const savedGender = localStorage.getItem('genderSelected');
+    if(savedGender && savedGender !== 'null') updateHeroForGender(savedGender);
+    else updateHeroForGender('women');
+    window.addEventListener('storage', function(e) { if(e.key === 'currentUser') updateNavbarForLogin(); });
+});
+window.viewProduct = viewProduct;
+window.toggleWishlist = toggleWishlist;
+window.addToCart = addToCart;
+window.scrollToProducts = scrollToProducts;
+window.filterProducts = filterProducts;
+window.openSearch = openSearch;
+window.toggleChat = toggleChat;
+window.sendMessage = sendMessage;
+window.submitReview = submitReview;
+window.selectGender = selectGender;
+window.closeGenderModal = closeGenderModal;
+window.toggleGenderModal = toggleGenderModal;
+window.performLogout = performLogout;
+window.handleLogoutClick = handleLogoutClick;
+window.showUserMenu = showUserMenu;
+</script>
+</body>
+</html>

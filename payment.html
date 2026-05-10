@@ -1,0 +1,210 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment - Noor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+.payment-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+    background: linear-gradient(135deg, #fff0f5, #ffe4ec);
+}
+.payment-container {
+    background: white;
+    border-radius: 30px;
+    max-width: 500px;
+    width: 100%;
+    padding: 40px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+}
+.payment-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.payment-header h2 {
+    font-size: 28px;
+}
+.payment-amount {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    color: #e91e63;
+    margin: 20px 0;
+}
+.card-element {
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+.card-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.card-row .form-group {
+    flex: 1;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+.pay-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #e91e63, #ff6b9d);
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+.security-badge {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+    font-size: 12px;
+}
+</style>
+</head>
+<body>
+
+
+<div class="payment-page">
+    <div class="payment-container">
+        <div class="payment-header">
+            <div class="logo" style="justify-content: center;">✨ Noor</div>
+            <h2>Secure Payment</h2>
+        </div>
+       
+        <div class="payment-amount" id="paymentAmount">₹0</div>
+       
+        <form id="paymentForm">
+            <div class="card-element">
+                <div class="form-group">
+                    <label>Card Number</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                </div>
+                <div class="card-row">
+                    <div class="form-group">
+                        <label>Expiry Date</label>
+                        <input type="text" id="expiry" placeholder="MM/YY">
+                    </div>
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="password" id="cvv" placeholder="123" maxlength="3">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Cardholder Name</label>
+                    <input type="text" id="cardName" placeholder="Name on card">
+                </div>
+            </div>
+           
+            <button type="button" class="pay-btn" onclick="processPayment()">
+                Pay Now <i class="fas fa-arrow-right"></i>
+            </button>
+        </form>
+       
+        <div class="security-badge">
+            <i class="fas fa-lock"></i> Secured by Noor Payments
+        </div>
+    </div>
+</div>
+
+
+<script>
+// Get order from localStorage
+const currentOrder = JSON.parse(localStorage.getItem('currentOrder'));
+let amount = currentOrder ? currentOrder.total : 0;
+
+
+document.getElementById('paymentAmount').innerHTML = `₹${amount}`;
+
+
+// Format card number
+document.getElementById('cardNumber').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+    e.target.value = value.substring(0, 19);
+});
+
+
+// Format expiry
+document.getElementById('expiry').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length >= 2) {
+        value = value.substring(0, 2) + '/' + value.substring(2, 4);
+    }
+    e.target.value = value;
+});
+
+
+function processPayment() {
+    const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+    const expiry = document.getElementById('expiry').value;
+    const cvv = document.getElementById('cvv').value;
+    const cardName = document.getElementById('cardName').value;
+   
+    // Basic validation
+    if (!cardNumber || cardNumber.length < 16) {
+        alert('Please enter a valid card number');
+        return;
+    }
+   
+    if (!expiry || expiry.length < 5) {
+        alert('Please enter valid expiry date');
+        return;
+    }
+   
+    if (!cvv || cvv.length < 3) {
+        alert('Please enter valid CVV');
+        return;
+    }
+   
+    if (!cardName) {
+        alert('Please enter cardholder name');
+        return;
+    }
+   
+    // Show loading
+    const btn = document.querySelector('.pay-btn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Processing...';
+    btn.disabled = true;
+   
+    // Simulate payment processing
+    setTimeout(() => {
+        // Update order status
+        let orders = JSON.parse(localStorage.getItem('orders')) || [];
+        const orderIndex = orders.findIndex(o => o.orderId === currentOrder.orderId);
+        if (orderIndex !== -1) {
+            orders[orderIndex].status = 'payment_completed';
+            localStorage.setItem('orders', JSON.stringify(orders));
+            localStorage.setItem('currentOrder', JSON.stringify(orders[orderIndex]));
+        }
+       
+        // Redirect to success page
+        window.location.href = 'order-success.html';
+    }, 2000);
+}
+</script>
+</body>
+</html>  
+
+

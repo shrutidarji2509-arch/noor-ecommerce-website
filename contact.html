@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Noor - Luxury Beauty Destination</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+    /* Contact Page Specific Styles */
+    .contact-page {
+        padding: 100px 50px 80px;
+        min-height: 70vh;
+        background: linear-gradient(135deg, #fff0f5, #ffe4ec);
+    }
+    .contact-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 50px;
+        background: white;
+        border-radius: 40px;
+        overflow: hidden;
+        box-shadow: 0 30px 50px rgba(0,0,0,0.1);
+        animation: fadeInUp 0.6s ease;
+    }
+    .contact-info {
+        background: linear-gradient(135deg, #e91e63, #ff6b9d);
+        padding: 50px;
+        color: white;
+    }
+    .contact-info h2 {
+        font-size: 36px;
+        font-family: 'Playfair Display', serif;
+        margin-bottom: 20px;
+    }
+    .contact-info p {
+        margin-bottom: 30px;
+        line-height: 1.6;
+        opacity: 0.9;
+    }
+    .info-details {
+        margin: 40px 0;
+    }
+    .info-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+    .info-item i {
+        width: 45px;
+        height: 45px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+    }
+    .info-item div h4 {
+        margin-bottom: 5px;
+        font-weight: 600;
+    }
+    .info-item div p, .info-item div a {
+        color: rgba(255,255,255,0.9);
+        text-decoration: none;
+        font-size: 14px;
+    }
+    .social-links-contact {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+    }
+    .social-links-contact a {
+        width: 40px;
+        height: 40px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 18px;
+        transition: all 0.3s;
+    }
+    .social-links-contact a:hover {
+        background: white;
+        color: #e91e63;
+        transform: translateY(-3px);
+    }
+    .contact-form {
+        padding: 50px;
+    }
+    .contact-form h3 {
+        font-size: 28px;
+        margin-bottom: 10px;
+        color: #333;
+    }
+    .contact-form > p {
+        color: #666;
+        margin-bottom: 30px;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+        width: 100%;
+        padding: 14px 18px;
+        border: 1px solid #eee;
+        border-radius: 15px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        transition: all 0.3s;
+        background: #f9f9f9;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+        outline: none;
+        border-color: #e91e63;
+        background: white;
+        box-shadow: 0 0 0 3px rgba(233,30,99,0.1);
+    }
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    .submit-contact {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #e91e63, #ff6b9d);
+        border: none;
+        border-radius: 50px;
+        color: white;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+        margin-top: 10px;
+    }
+    .submit-contact:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(233,30,99,0.3);
+    }
+    .map-section {
+        margin-top: 60px;
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .map-section iframe {
+        width: 100%;
+        height: 350px;
+        border: 0;
+    }
+    .faq-section {
+        margin-top: 80px;
+        text-align: center;
+    }
+    .faq-section h2 {
+        font-size: 36px;
+        margin-bottom: 40px;
+    }
+    .faq-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+    }
+    .faq-card {
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+        text-align: left;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        transition: transform 0.3s;
+    }
+    .faq-card:hover {
+        transform: translateY(-5px);
+    }
+    .faq-card h4 {
+        color: #e91e63;
+        margin-bottom: 12px;
+        font-size: 18px;
+    }
+    .faq-card p {
+        color: #666;
+        line-height: 1.5;
+        font-size: 14px;
+    }
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    @media (max-width: 900px) {
+        .contact-container { grid-template-columns: 1fr; }
+        .contact-page { padding: 80px 20px; }
+        .contact-info, .contact-form { padding: 30px; }
+        .form-row { grid-template-columns: 1fr; gap: 0; }
+    }
+    @media (max-width: 480px) {
+        .faq-grid { grid-template-columns: 1fr; }
+    }
+    .success-message {
+        background: #4caf50;
+        color: white;
+        padding: 12px;
+        border-radius: 10px;
+        text-align: center;
+        margin-top: 15px;
+        display: none;
+    }
+    .error-message-contact {
+        color: #ff4444;
+        font-size: 12px;
+        margin-top: 5px;
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+
+
+
+<!-- Navbar (consistent with existing design) -->
+<nav class="navbar" id="navbar">
+    <div class="logo">
+        <span class="logo-icon">✨</span>
+        <span class="logo-text">Noor</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="index.html#products">Products</a>
+        <a href="index.html#new-arrivals">New Arrivals</a>
+        <a href="index.html#best-sellers">Best Sellers</a>
+        <a href="index.html#reviews">Reviews</a>
+        <a href="contact.html" class="active-link">Contact</a>
+    </div>
+    <div class="nav-icons">
+        <i class="fas fa-search" onclick="window.openSearch ? window.openSearch() : alert('🔍 Search feature available on homepage')"></i>
+        <i class="far fa-heart" onclick="window.location.href='wishlist.html'"></i>
+        <i class="fas fa-shopping-bag" onclick="window.location.href='cart.html'"></i>
+        <i class="far fa-user" onclick="window.location.href='login.html'"></i>
+        <i class="fas fa-venus-mars gender-toggle" onclick="if(window.toggleGenderModal) window.toggleGenderModal(); else alert('Change mode on homepage')" title="Change Mode"></i>
+        <span id="cart-count-nav" class="cart-badge">0</span>
+    </div>
+    <div class="hamburger" id="hamburger">☰</div>
+</nav>
+
+
+
+
+<!-- Contact Page Content -->
+<div class="contact-page">
+    <div class="contact-container">
+        <!-- Left Side: Contact Info -->
+        <div class="contact-info">
+            <h2>Let's Connect ✨</h2>
+            <p>We'd love to hear from you! Whether you have a question about our products, need assistance with your order, or just want to share your Noor experience — we're here for every YOU.</p>
+            <div class="info-details">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Visit Us</h4>
+                        <p>Noor Beauty Lounge, 42, Luxury Avenue, Andheri East, Mumbai - 400093, India</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>
+                        <h4>Call Us</h4>
+                        <p>+91 98765 43210</p>
+                        <p>Toll Free: 1800-123-NOOR</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>Email Us</h4>
+                        <p>care@noor.com</p>
+                        <p>support@noor.com</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>Business Hours</h4>
+                        <p>Monday - Friday: 10:00 AM - 8:00 PM</p>
+                        <p>Saturday - Sunday: 11:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="social-links-contact">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+       
+        <!-- Right Side: Contact Form -->
+        <div class="contact-form">
+            <h3>Get in Touch</h3>
+            <p>Fill out the form below and our team will get back to you within 24 hours.</p>
+            <form id="contactForm" onsubmit="return handleContactSubmit(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" id="fullName" placeholder="Full Name *" required>
+                        <div class="error-message-contact" id="nameError"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="emailId" placeholder="Email Address *" required>
+                        <div class="error-message-contact" id="emailErrorContact"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="tel" id="phoneNumber" placeholder="Phone Number" maxlength="10">
+                        <div class="error-message-contact" id="phoneErrorContact"></div>
+                    </div>
+                    <div class="form-group">
+                        <select id="subjectType">
+                            <option value="general">General Inquiry</option>
+                            <option value="order">Order Support</option>
+                            <option value="product">Product Information</option>
+                            <option value="return">Returns & Exchange</option>
+                            <option value="collab">Collaboration / PR</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea id="messageContent" rows="5" placeholder="Your Message *" required></textarea>
+                    <div class="error-message-contact" id="messageError"></div>
+                </div>
+                <button type="submit" class="submit-contact">Send Message <i class="fas fa-paper-plane"></i></button>
+                <div id="formSuccessMsg" class="success-message">
+                    <i class="fas fa-check-circle"></i> Thank you! Your message has been sent. We'll reply soon. ✨
+                </div>
+            </form>
+        </div>
+    </div>
+   
+    <!-- Google Maps Embed (Noor Luxury Location) -->
+    <div class="map-section section-container">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.5056931284667!2d72.86918931489452!3d19.1133809870851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c82f0b7b7b7b%3A0x2b2b2b2b2b2b2b2b!2sMumbai!5e0!3m2!1sen!2sin!4v1699999999999!5m2!1sen!2sin"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+   
+    <!-- FAQ Section -->
+    <div class="faq-section section-container">
+        <h2>Frequently Asked <span class="gradient-text">Questions</span></h2>
+        <div class="faq-grid">
+            <div class="faq-card">
+                <h4>📦 How long does shipping take?</h4>
+                <p>Standard shipping takes 3-5 business days. Express shipping available at checkout (1-2 days). Free shipping on orders above ₹999.</p>
+            </div>
+            <div class="faq-card">
+                <h4>🔄 What is your return policy?</h4>
+                <p>We offer a 7-day easy return policy for unused products in original packaging. Contact our support team to initiate a return.</p>
+            </div>
+            <div class="faq-card">
+                <h4>💳 Which payment methods do you accept?</h4>
+                <p>We accept Credit/Debit Cards, UPI, Net Banking, and Cash on Delivery (COD) for eligible pin codes.</p>
+            </div>
+            <div class="faq-card">
+                <h4>✨ Do you have a loyalty program?</h4>
+                <p>Yes! Sign up for our Noor Rewards program to earn points on every purchase and get exclusive discounts.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Footer (Consistent with existing design) -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Noor ✨</h3>
+            <p>For every YOU! Luxury beauty essentials crafted with love.</p>
+            <div class="social-icons">
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="index.html#products">Products</a>
+            <a href="index.html#reviews">Reviews</a>
+            <a href="track-order.html">Track Order</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="footer-section">
+            <h4>Customer Care</h4>
+            <a href="#">FAQ</a>
+            <a href="#">Shipping Policy</a>
+            <a href="#">Returns & Exchange</a>
+            <a href="#">Terms & Conditions</a>
+        </div>
+        <div class="footer-section">
+            <h4>Contact Us</h4>
+            <p><i class="fas fa-envelope"></i> care@noor.com</p>
+            <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2024 Noor. All rights reserved. For every YOU! ✨</p>
+    </div>
+</footer>
+
+
+
+
+<!-- Floating Cart & Chatbot (from existing design) -->
+<div class="floating-cart" onclick="window.location.href='cart.html'">
+    🛒 <span id="cart-count">0</span>
+</div>
+
+
+
+
+<div class="chatbot" id="chatbot">
+    <div class="chatbot-header" onclick="if(window.toggleChat) window.toggleChat()">
+        <i class="fas fa-robot"></i>
+        <span>Noor Assistant</span>
+        <i class="fas fa-chevron-down" id="chatToggleIcon"></i>
+    </div>
+    <div class="chatbot-body" id="chatBody" style="display: none;">
+        <div class="chat-messages" id="chatMessages">
+            <div class="bot-message">✨ Hello! I'm Noor's AI assistant. How can I help you today?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Ask me anything...">
+            <button onclick="if(window.sendMessage) window.sendMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    // Update cart count from localStorage (shared function)
+    function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartCountElements = document.querySelectorAll('#cart-count, #cart-count-nav');
+        cartCountElements.forEach(el => {
+            if (el) el.innerText = cart.length;
+        });
+    }
+   
+    // Handle Contact Form Submission
+    function handleContactSubmit(event) {
+        event.preventDefault();
+       
+        // Reset errors
+        document.querySelectorAll('.error-message-contact').forEach(el => el.style.display = 'none');
+        document.querySelectorAll('.form-group input, .form-group textarea, .form-group select').forEach(el => el.classList.remove('error'));
+        document.getElementById('formSuccessMsg').style.display = 'none';
+       
+        let isValid = true;
+        const fullName = document.getElementById('fullName').value.trim();
+        const email = document.getElementById('emailId').value.trim();
+        const phone = document.getElementById('phoneNumber').value.trim();
+        const message = document.getElementById('messageContent').value.trim();
+       
+        // Validate Name
+        if (!fullName) {
+            showContactError('nameError', 'Full name is required');
+            document.getElementById('fullName').classList.add('error');
+            isValid = false;
+        } else if (fullName.length < 2) {
+            showContactError('nameError', 'Name must be at least 2 characters');
+            document.getElementById('fullName').classList.add('error');
+            isValid = false;
+        }
+       
+        // Validate Email
+        const emailPattern = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
+        if (!email) {
+            showContactError('emailErrorContact', 'Email address is required');
+            document.getElementById('emailId').classList.add('error');
+            isValid = false;
+        } else if (!emailPattern.test(email)) {
+            showContactError('emailErrorContact', 'Please enter a valid email address');
+            document.getElementById('emailId').classList.add('error');
+            isValid = false;
+        }
+       
+        // Validate Phone (optional but if provided must be 10 digits)
+        if (phone && !/^\d{10}$/.test(phone)) {
+            showContactError('phoneErrorContact', 'Please enter a valid 10-digit phone number');
+            document.getElementById('phoneNumber').classList.add('error');
+            isValid = false;
+        }
+       
+        // Validate Message
+        if (!message) {
+            showContactError('messageError', 'Message cannot be empty');
+            document.getElementById('messageContent').classList.add('error');
+            isValid = false;
+        } else if (message.length < 10) {
+            showContactError('messageError', 'Please provide more details (min 10 characters)');
+            document.getElementById('messageContent').classList.add('error');
+            isValid = false;
+        }
+       
+        if (!isValid) return false;
+       
+        // Save contact inquiry to localStorage (for demo)
+        const contactInquiries = JSON.parse(localStorage.getItem('noorContacts')) || [];
+        const newInquiry = {
+            id: Date.now(),
+            name: fullName,
+            email: email,
+            phone: phone || 'Not provided',
+            subject: document.getElementById('subjectType').value,
+            message: message,
+            date: new Date().toLocaleString(),
+            status: 'pending'
+        };
+        contactInquiries.push(newInquiry);
+        localStorage.setItem('noorContacts', JSON.stringify(contactInquiries));
+       
+        // Show success message
+        const successDiv = document.getElementById('formSuccessMsg');
+        successDiv.style.display = 'block';
+       
+        // Reset form
+        document.getElementById('contactForm').reset();
+       
+        // Optionally send to console for demo
+        console.log('Contact inquiry saved:', newInquiry);
+       
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+            successDiv.style.display = 'none';
+        }, 5000);
+       
+        // Also show a notification using existing showNotification if available
+        if (typeof showNotification === 'function') {
+            showNotification('Message sent successfully! We\'ll get back to you soon. ✨', 'success');
+        } else {
+            alert('Thank you! Your message has been sent. We will contact you shortly.');
+        }
+       
+        return false;
+    }
+   
+    function showContactError(elementId, message) {
+        const errorEl = document.getElementById(elementId);
+        if (errorEl) {
+            errorEl.innerText = message;
+            errorEl.style.display = 'block';
+        }
+    }
+   
+    // Hamburger menu toggle (consistent with index)
+    function initHamburger() {
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+        }
+    }
+   
+    // Chatbot toggle (basic)
+    function toggleChat() {
+        const chatbot = document.getElementById('chatbot');
+        const chatBody = document.getElementById('chatBody');
+        const icon = document.getElementById('chatToggleIcon');
+        if (chatbot && chatBody) {
+            const isActive = chatbot.classList.contains('active');
+            if (!isActive) {
+                chatbot.classList.add('active');
+                chatBody.style.display = 'flex';
+                if (icon) icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+            } else {
+                chatbot.classList.remove('active');
+                chatBody.style.display = 'none';
+                if (icon) icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
+            }
+        }
+    }
+   
+    // Simple chat response function
+    function sendMessage() {
+        const input = document.getElementById('chatInput');
+        const message = input.value.trim();
+        if (!message) return;
+        const messagesContainer = document.getElementById('chatMessages');
+        if (!messagesContainer) return;
+        messagesContainer.innerHTML += `<div class="user-message">${escapeHtml(message)}</div>`;
+        input.value = '';
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        setTimeout(() => {
+            let reply = "✨ Thanks for reaching out! For immediate help, please visit our Contact page or email care@noor.com. How else can I assist?";
+            if (message.toLowerCase().includes('order')) reply = "📦 To track your order, go to Track Order page or provide your Order ID. Need help? Contact support.";
+            if (message.toLowerCase().includes('return')) reply = "🔄 We have a 7-day easy return policy. Please reach out to our support team for assistance.";
+            if (message.toLowerCase().includes('shipping')) reply = "🚚 Free shipping on orders above ₹999. Delivery takes 3-5 business days.";
+            messagesContainer.innerHTML += `<div class="bot-message">${reply}</div>`;
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }, 500);
+    }
+   
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+   
+    // Expose functions globally for inline handlers
+    window.handleContactSubmit = handleContactSubmit;
+    window.toggleChat = toggleChat;
+    window.sendMessage = sendMessage;
+    window.updateCartCount = updateCartCount;
+   
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCartCount();
+        initHamburger();
+        // Set active link styling
+        const currentPage = window.location.pathname.split('/').pop();
+        const contactLink = document.querySelector('.nav-links a[href="contact.html"]');
+        if (contactLink) contactLink.style.color = '#e91e63';
+    });
+   
+    // Reuse existing global functions from script.js if available (cart updates)
+    if (typeof window.updateCartCount !== 'function') window.updateCartCount = updateCartCount;
+   
+    // Close mobile menu on window resize
+    window.addEventListener('resize', function() {
+        const navLinks = document.getElementById('navLinks');
+        if (window.innerWidth > 768 && navLinks) {
+            navLinks.classList.remove('active');
+        }
+    });
+</script>
+</body>
+</html>
