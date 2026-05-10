@@ -141,8 +141,10 @@ Order Confirmation
 
 # 📸 Screenshots
 
+
 ## 🏠 Homepage
-![Homepage](https://raw.githubusercontent.com/shrutidarji2509-arch/noor-ecommerce-website/main/images/screenshot/homepage.png)
+
+![Homepage](./images/screenshot/homepage.png)
 
 ## ✨ Product Detail Page
 ![Product Detail](images/screenshot/productdetail.png)
