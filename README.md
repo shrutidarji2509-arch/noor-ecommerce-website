@@ -163,7 +163,7 @@ Order Confirmation
 
 ## 🌍 Live Project
 
-<a href="[https://your-website-link.com](https://shrutidarji2509-arch.github.io/noor-ecommerce-website/#reviews)" target="_blank">
+<a href="https://shrutidarji2509-arch.github.io/noor-ecommerce-website/" target="_blank">
   <img src="https://img.shields.io/badge/🔗%20Visit%20Live%20Website-000?style=for-the-badge&logo=google-chrome&logoColor=white" />
 </a>
 
