@@ -116,7 +116,7 @@ The project also helps in understanding:
 
 # 🔄 Website Flow / Working
 
-```text
+
 Home Page
    ↓
 Browse Products
